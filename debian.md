@@ -1,13 +1,14 @@
 ## Bash
 
 ### bash commands
+
 ```bash
 ### user management
 groups mahesh # list of groups of user mahesh
 getent group docker # check list of users in group docker
 useradd -m mahesh # create user named mahesh, # -m == create user's home folder
 usermod -aG docker mahesh  # add user mahesh to group docker
-
+passwd mahesh # set password for user mahesh
 
 ### file management
 pwd           # print present-working-directory/current-folder
@@ -41,7 +42,7 @@ rm -rf folder_name    # delete folder
 
 ### file content handling
 cat file1       # print data from file1 (cat = concatenation)
-cat > file1     # data typed after this comand will be the content of the file1 
+cat > file1     # data typed after this comand will be the content of the file1
 cat >> file1     # data typed after this comand, will be appended to the file1
 cat input | python app.py  # send/pipe data in 'input' file to the programme - python app.py
 touch file1.txt # create file named `file1.txt`
@@ -54,6 +55,10 @@ grep shiva *         # #search 'shiva' in all files in current folder
 less file1.txt      # #view contents of 'file1.txt' one screenful at a time.
 
 
+### terminal management
+echo $SHELL  # check which shell terminal  is currently using
+chsh -s /bin/bash  # change default shell to bash, logout and login again to see the changes
+
 ### time management
 date  # print current date and time
 
@@ -62,4 +67,3 @@ date  # print current date and time
 script session.log # start storing commands and output
 exit # print all stored history in `sessin.log` file in current folder
 ```
-
