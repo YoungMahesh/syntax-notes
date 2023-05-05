@@ -101,17 +101,16 @@
    1. name `whoami` in `routers.whoami`, as every router will have different name (you can choose whatever name you like)
    1. domain-name inside `Host(`whoami.example.com`)`
 
-
 ### Assigning HTTPS to a Domain to already running container
-1. create `labels` file with labels list in it
-    ```
-    test.enable=true
-    test.http.routers.whoami.entrypoints=websecure
-    test.http.routers.whoami.rule=Host(`whoami.work1.in`)
-    test.http.routers.whoami.tls.certresolver=myresolver
-    ```
-1. run `docker run --label-file ./labels <container-name>`
 
+1. create `labels` file with labels list in it
+   ```
+   test.enable=true
+   test.http.routers.whoami.entrypoints=websecure
+   test.http.routers.whoami.rule=Host(`whoami.work1.in`)
+   test.http.routers.whoami.tls.certresolver=myresolver
+   ```
+1. run `docker run --label-file ./labels <container-name>`
 
 ## [Concepts](https://doc.traefik.io/traefik/getting-started/concepts/)
 

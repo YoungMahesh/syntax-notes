@@ -1,4 +1,5 @@
 ### normal mode
+
 ```bash
 i          # go to insert mode
 :x         # write and save
