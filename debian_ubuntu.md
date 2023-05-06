@@ -1,6 +1,5 @@
-## Bash
 
-### bash commands
+### bash
 
 ```bash
 ### user management
@@ -67,4 +66,9 @@ date  # print current date and time
 ### session history
 script session.log # start storing commands and output
 exit # print all stored history in `sessin.log` file in current folder
+```
+
+### desktop
+```bash
+Cntr + Alt + <left or right arrow-key>  # move to left or right workspace
 ```
