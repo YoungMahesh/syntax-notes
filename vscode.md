@@ -6,7 +6,7 @@ k   # move upward
 
 #--------------------- Terminal --------------------------------------
 Cntr + `    # move to terminal
-
+Cntr + ~    # open new terminal window
 
 #--------------------- Text Editor ----------------------------------
 Cntr + 1    # move to text editor
