@@ -62,6 +62,11 @@ ln -s /bin/python3 python  # create soft symlink, provide path of executable for
 ### time management
 date  # print current date and time
 
+### history
+history      # list of all commands executed
+history 7    # list of last 7 commands executed
+!1132        # run 1132th command from history
+(Cntr + r) <keyword> # search for command with <keyword> in history list
 
 ### session history
 script session.log # start storing commands and output
