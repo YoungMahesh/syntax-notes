@@ -11,11 +11,13 @@ k          # move cursor to line above
 h          # move cursor to left
 l          # move cursor to right
 gg         # move cursor to begining of file
+G          # move cursor to the end of the file
+gg,v,G     # select all text of the file, gg will move cursor to beginning
+           # v will start visual-mode, G will move cursor to end of file
 A          # move cursor to the end of the line + go to insert mode
 
 dd         # cut line
 yy         # copy line
-VG         # select all text of the file
 y          # copy selected text
 p          # paste
 u          # undo
