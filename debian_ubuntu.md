@@ -73,6 +73,9 @@ script session.log # start storing commands and output
 exit # print all stored history in `sessin.log` file in current folder
 ```
 
+### operating sytem
+dpkg --print-architecture  # check if computer is of amd or arm architecture
+
 ### desktop
 ```bash
 Cntr + Alt + <left or right arrow-key>  # move to left or right workspace

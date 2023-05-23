@@ -10,6 +10,8 @@ j          # move cursor to line below
 k          # move cursor to line above
 h          # move cursor to left
 l          # move cursor to right
+Cntr+f     # move cursor one page view down
+Cntr+b     # move cursor one page view up
 gg         # move cursor to begining of file
 G          # move cursor to the end of the file
 gg,v,G     # select all text of the file, gg will move cursor to beginning
