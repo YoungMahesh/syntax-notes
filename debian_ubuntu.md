@@ -1,4 +1,3 @@
-
 ### bash
 
 ```bash
@@ -74,9 +73,11 @@ exit # print all stored history in `sessin.log` file in current folder
 ```
 
 ### operating sytem
-dpkg --print-architecture  # check if computer is of amd or arm architecture
+
+dpkg --print-architecture # check if computer is of amd or arm architecture
 
 ### desktop
+
 ```bash
 Cntr + Alt + <left or right arrow-key>  # move to left or right workspace
 ```

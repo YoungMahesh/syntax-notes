@@ -15,7 +15,7 @@ rclone cat drive1:names.txt # print file-content on terminal
 
 rclone copy --progress ./cat.jpg drive1:pics  # copy local data to remote account, skip unchanged items
 
-rclone move -v --drive-server-side-across-configs drive1:Hosted/Books drive2:books   
+rclone move -v --drive-server-side-across-configs drive1:Hosted/Books drive2:books
 # move files server side
 # transfer files without using local-bandwidth, used with "copy", "move", and "sync"
 # "-v" to visualize the progress
@@ -25,15 +25,15 @@ rclone moveto drive1:tiger.jpg drive1:tiger11.jpg
 # rename file/folder
 
 rclone check drive_mahesh: ./drive
-# Checks the files in the source and destination match. 
-# It compares sizes and hashes (MD5 or SHA1) and logs a report of files which don't match. 
+# Checks the files in the source and destination match.
+# It compares sizes and hashes (MD5 or SHA1) and logs a report of files which don't match.
 # It doesn't alter the source or destination.
 
 rclone sync --dry-run /local-path dest:folder   # --dry-run shows changes which will happen if you run the command
 rclone sync -i --progress /home/youngmahesh/downloads/docs drive1:docs --transfers=1000
 # first-location is source, second-location is destination
 # Destination is updated to match source, including deleting files if necessary
-# "-i" flgs prompts you for permission before deleting anything, 
+# "-i" flgs prompts you for permission before deleting anything,
 # "--progress" shows the transferring files and transfer speed
 # "--transfers=1000" transfer 1000 files at a time
 

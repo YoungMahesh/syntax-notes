@@ -29,11 +29,11 @@ n          # jump to next search-result
 N          # jump to previous search-result
 
 #------------------------------- visual mode -------------------------------------------
-# move cursor using j,k,h,l to select text 
+# move cursor using j,k,h,l to select text
 ```
 
-
 ### configuration
+
 ```bash
 # set indentation of tab to 4
 # create or edit `~/.config/nvim/init.vim`
@@ -41,4 +41,3 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 ```
-
