@@ -57,6 +57,8 @@ less file1.txt      # #view contents of 'file1.txt' one screenful at a time.
 echo $SHELL  # check which shell terminal  is currently using
 chsh -s /bin/bash  # change default shell to bash, logout and login again to see the changes
 ln -s /bin/python3 python  # create soft symlink, provide path of executable for certain command
+alias docker-compose='docker compose' # now `docker-compose version` will execute -> `docker compose version`
+
 
 ### time management
 date  # print current date and time
