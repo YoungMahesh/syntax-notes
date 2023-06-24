@@ -1,14 +1,14 @@
 ### bash
 
 ```bash
-### user management
+#------------------------------ user management --------------------------------------------
 groups mahesh # list of groups of user mahesh
 getent group docker # check list of users in group docker
 useradd -m mahesh # create user named mahesh, # -m == create user's home folder
 usermod -aG docker mahesh  # add user mahesh to group docker
 passwd mahesh # set password for user mahesh
 
-### file management
+#------------------------------ file management --------------------------------------------
 pwd           # print present-working-directory/current-folder
 cd            # change-folder to home folder ($HOME)
 cd ..         # go to parent folder of current folder
@@ -38,7 +38,7 @@ rm file_name         # delete file
 rm -rf folder_name    # delete folder
 
 
-### file content handling
+#-------------------------- file content handling ---------------------------------------------------------
 cat file1       # print data from file1 (cat = concatenation)
 cat > file1     # data typed after this comand will be the content of the file1
 cat >> file1     # data typed after this comand, will be appended to the file1
@@ -53,23 +53,34 @@ grep shiva *         # #search 'shiva' in all files in current folder
 less file1.txt      # #view contents of 'file1.txt' one screenful at a time.
 
 
-### terminal management
+#--------------------------------- terminal management -----------------------------------------------------------
 echo $SHELL  # check which shell terminal  is currently using
 chsh -s /bin/bash  # change default shell to bash, logout and login again to see the changes
 ln -s /bin/python3 python  # create soft symlink, provide path of executable for certain command
 alias docker-compose='docker compose' # now `docker-compose version` will execute -> `docker compose version`
 
+###------------------------------ screen brightness -----------------------------------------------
+## for gnome you can use magnifier to control brightness as follows
+# go to Settings->Accessibility->Zoom->(1.Magifier->Magnification:1.00)(2.ColorEffects->Brightness)
 
-### time management
+echo $XDG_SESSION_TYPE  # check display server protocol
+# if display server protocol is x11 then you can use `xrandr` command as follows
+xrandr        # check connected devices, screen type and screen-resolutions available 
+xrandr --output HDMI-2 --brightness .8   # manage brightness below default
+xrandr --output HDMI-2 --mode 1368x768   # change screen resolution
+# here HDMI-2 is name of device connected, replace it connected device name on your system
+
+
+###------------------------------ time management -----------------------------------------------
 date  # print current date and time
 
-### history
+#-------------------------------- history ------------------------------------------------------
 history      # list of all commands executed
 history 7    # list of last 7 commands executed
 !1132        # run 1132th command from history
 (Cntr + r) <keyword> # search for command with <keyword> in history list
 
-### session history
+#------------------------------ session history ------------------------------------------------
 script session.log # start storing commands and output
 exit # print all stored history in `sessin.log` file in current folder
 ```
