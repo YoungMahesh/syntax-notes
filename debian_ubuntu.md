@@ -87,9 +87,16 @@ exit # print all stored history in `sessin.log` file in current folder
 
 ### operating sytem
 
-dpkg --print-architecture # check if computer is of amd or arm architecture
+- `dpkg --print-architecture` - check if computer have amd or arm architecture
 
 ### desktop
+- Control brightness
+  1. install [google chrome](https://www.google.com/intl/en_in/chrome/)
+  2. install [gnome-shell-extension](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep)
+  3. install brightness controller
+      - Upto gnome-version 42 use: [soft-brightness](https://extensions.gnome.org/extension/1625/soft-brightness/)
+      - After gnome-version 42 use: [soft-brightness-plus](https://extensions.gnome.org/extension/5943/soft-brightness-plus/)
+
 
 ```bash
 Cntr + Alt + <left or right arrow-key>  # move to left or right workspace
