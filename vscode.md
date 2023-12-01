@@ -1,0 +1,95 @@
+```bash
+#------------------- Explorer/Files-section ---------------------------
+Cntr + E  # move to files/explorer-section
+j   # move downward
+k   # move upward
+
+#--------------------- Terminal --------------------------------------
+Cntr + `    # move to terminal
+Cntr + ~    # open new terminal window
+
+#--------------------- Text Editor ----------------------------------
+Cntr + 1    # move to text editor
+Cntr + p    # search files by name in current directory
+Cntr + P    # open command palette
+```
+
+### locations
+
+- List of non-default keybindings: `/home/mahesh/.config/Code/User/keybindings.json`
+  - If you wish to add, remove or modify non-default keybindigs update this file
+
+### disable syntax warnings
+
+- sometimes to review code, we download it and read it inside vscode without installing dependencies like node_modules, if code is written in typescript or javascript then it leads to syntax warnings in vscode
+- we can disable those warning by
+  1.  open command pallete (`Cntr + Shift + p`)
+  2.  open workspace settings (JSON)
+  3.  disable typescript and javscript validation by adding these lines
+
+```json
+"typescript.validate.enable": false,
+"javascript.validate.enable": false,
+```
+
+### my vscode settings
+
+- Update: `Cntr+shift+p -> Preferenes: Open User Settings(JSON)` or `~/.config/Code/User/settings.json`
+- Install prettier: `code --install-extension esbenp.prettier-vscode`
+
+```json
+{
+  "window.zoomLevel": 1,
+  "workbench.sideBar.location": "right",
+  "files.autoSave": "onFocusChange",
+  "window.titleBarStyle": "custom",
+  "workbench.editor.enablePreview": false, // open page always in new tab
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "workbench.startupEditor": "none",
+}
+```
+
+### my vscode keybindings
+
+- Update: `Cntr+shift+p -> Preferenes: Open Keyboard Shortcuts(JSON)` or `~/.config/Code/User/keybindings.json`
+- neovim
+  - install neovim as mentioned in [neovim](./neovim.md) file
+  - neovim-extension overrides system defaults, hence some system-defaults are also mentioned here to define priority
+  - Install neovim: `code --install-extension asvetliakov.vscode-neovim`
+
+```json
+[
+  {
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.pinEditor",
+    "when": "!activeEditorIsPinned"
+  },
+  {
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.unpinEditor",
+    "when": "activeEditorIsPinned"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "editor.action.clipboardCopyAction"
+  },
+  {
+    "key": "ctrl+a",
+    "command": "editor.action.selectAll"
+  },
+  {
+    "key": "ctrl+v",
+    "command": "editor.action.clipboardPasteAction"
+  },
+  {
+    "key": "ctrl+k ctrl+i",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  }
+]
+```
