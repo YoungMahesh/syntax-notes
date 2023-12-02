@@ -145,8 +145,16 @@ crontab -e    # edit cronjob file
 
 ```bash
 sudo apt update && sudo apt upgrade
-sudo apt install git pass chrome-gnome-shell
+sudo apt install git pass chrome-gnome-shell autojump
 # install google-chrome, vscode from official websites
 # install telegram, extensions for built-in `Ubuntu Software` app
 # setup `soft brightness plus` & `neovim` by following documentation
+```
+
+### font
+```bash
+fc-list  # list all fonts on the computer
+# download font from a font website such as: https://www.nerdfonts.com/font-downloads
+# copy folder or .ttf file to `/usr/share/fonts` directory
+fc-list | grep "CodeNewRoman"  # verify font (here CodeNewRoman) is installed on system
 ```
