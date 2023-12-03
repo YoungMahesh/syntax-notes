@@ -1,5 +1,6 @@
 ```bash
 pass   # list all passwords
+export EDITOR=nvim  # append this to ~/.bashrc file to set neovim as default editor
 pass insert github/personal   # add new password, here we are storing it in `github` directory
 pass insert github/work
 pass generate aws    # generate and store a new password
@@ -11,6 +12,9 @@ pass edit github/personal  # edit password or add metadata
 # append `export $EDITOR=nvim` in ~/.bashrc file, to use nvim for editing pass files, word `export` is necessory to add
 # metadata such as email, address etc, will go on any line below password line
 # first line is for password, all other lines for metadata
+
+# if you are getting warnging: There is no assurance this key belongs to the named user: change trust of gpg-key as mentiond in ./gpg.md
+
 pass rm github/personal  # remove password
 pass git log  # changes made until now
 pass git revert HEAD   # remove last changes

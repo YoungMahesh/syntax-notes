@@ -28,6 +28,23 @@ gpg --output private.pgp --armor --export-secret-key <gpg-public-key>
 # import on machine 2
 gpg --import public.pgp  # if you have imported private-key, public-key will be generated automatically
 gpg --import private.pgp
+
+
+# -------------- enable trust -------------------------
+gpg --edit-key <KEY_ID>
+gpg> trust            
+# You will be asked to select the trust level from the following:
+# 1 = I don't know or won't say
+# 2 = I do NOT trust
+# 3 = I trust marginally
+# 4 = I trust fully
+# 5 = I trust ultimately
+# m = back to the main menu
+# I selected 5 since I created the key so of course I trust it ultimately :). It will ask you to confirm your decision:
+Your decision? 5
+Do you really want to set this key to ultimate trust? (y/N) y
+# After confirming, quit with:
+gpg> quit
 ```
 
 - GnuPG (GNU Privacy Gaurd) is a complete and free implementation of the OpenPGP standard defined by PGP
