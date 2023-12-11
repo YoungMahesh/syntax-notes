@@ -104,6 +104,11 @@ Cntr + P    # open command palette
   {
     "key": "ctrl+p",
     "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "tab",
+    "command": "acceptSelectedSuggestion",
+    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
   }
 ]
 ```
