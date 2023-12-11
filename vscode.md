@@ -100,6 +100,10 @@ Cntr + P    # open command palette
     "key": "shift+tab",
     "command": "outdent",
     "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen"
   }
 ]
 ```
