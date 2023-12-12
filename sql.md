@@ -1,8 +1,9 @@
 # sql commands
 
 ```sql
---------------------- database -------------------------
-CREATE DATABASE Databasename;
+--------------------- database (mysql, postgresql) -------------------------
+-- sqlite does not support this, .db file of sqlite represents a single database
+CREATE DATABASE Databasename;  
 SHOW DATABASES;
 USE Databasename;
 ----------------------- table ------------------------
