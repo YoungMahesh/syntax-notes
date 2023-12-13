@@ -129,6 +129,10 @@ exit # print all stored history in `sessin.log` file in current folder
 Cntr + Alt + <left or right arrow-key>  # move to left or right workspace
 ```
 
+- shortcuts
+  - ctrl + tab : switch windows from current workspace
+  - windows + tab : switch from all workspaces
+
 ### cron-job
 
 ```bash
