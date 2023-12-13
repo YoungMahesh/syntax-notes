@@ -118,6 +118,11 @@ Cntr + P    # open command palette
   {
     "key": "ctrl+x",
     "command": "editor.action.clipboardCutAction"
+  },
+  { // accept github-copilot suggestion
+    "key": "tab",
+    "command": "editor.action.inlineSuggest.commit",
+    "when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
   }
 ]
 ```
