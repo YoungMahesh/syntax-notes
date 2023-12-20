@@ -123,6 +123,11 @@ Cntr + P    # open command palette
     "key": "tab",
     "command": "editor.action.inlineSuggest.commit",
     "when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "actions.find",
+    "when": "editorFocus || editorIsOpen"
   }
 ]
 ```
