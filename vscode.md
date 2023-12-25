@@ -35,7 +35,7 @@ Cntr + P    # open command palette
 ### my vscode settings
 
 - Update: `Cntr+shift+p -> Preferenes: Open User Settings(JSON)` or `~/.config/Code/User/settings.json`
-- Install prettier: `code --install-extension esbenp.prettier-vscode`
+- Install extensions: `code --install-extension esbenp.prettier-vscode golang.Go`
 
 ```json
 {
@@ -45,8 +45,14 @@ Cntr + P    # open command palette
   "window.titleBarStyle": "custom",
   "workbench.editor.enablePreview": false, // open page always in new tab
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
   "terminal.integrated.sendKeybindingsToShell": true,
   "workbench.startupEditor": "none",
+  "files.associations": {
+    "*.json": "jsonc"
+  },
 }
 ```
 
