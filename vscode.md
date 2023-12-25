@@ -35,7 +35,7 @@ Cntr + P    # open command palette
 ### my vscode settings
 
 - Update: `Cntr+shift+p -> Preferenes: Open User Settings(JSON)` or `~/.config/Code/User/settings.json`
-- Install extensions: `code --install-extension esbenp.prettier-vscode golang.Go`
+- Install extensions: `code --install-extension esbenp.prettier-vscode NomicFoundation.hardhat-solidity golang.Go`
 
 ```json
 {
@@ -45,6 +45,9 @@ Cntr + P    # open command palette
   "window.titleBarStyle": "custom",
   "workbench.editor.enablePreview": false, // open page always in new tab
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[solidity]": {
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
+  },
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
@@ -53,6 +56,7 @@ Cntr + P    # open command palette
   "files.associations": {
     "*.json": "jsonc"
   },
+  "update.mode": "none"
 }
 ```
 
