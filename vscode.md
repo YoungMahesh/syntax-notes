@@ -60,7 +60,14 @@ Cntr + P    # open command palette
 }
 ```
 
-### my vscode keybindings
+### default vscode binding
+- global search 
+  - `Cntr + Shift + f`: search text in all files of opened directory
+  - `Fn4`: move forward in global search results
+  - `Shift + Fn4`: move backward in global search results
+  - `Enter`: move cursor to current global search result
+
+### my custom vscode keybindings
 
 - Update: `Cntr+shift+p -> Preferenes: Open Keyboard Shortcuts(JSON)` or `~/.config/Code/User/keybindings.json`
 - neovim
