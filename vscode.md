@@ -67,7 +67,8 @@ Cntr + P    # open command palette
   - install neovim as mentioned in [neovim](./neovim.md) file
   - neovim-extension overrides system defaults, hence some system-defaults are also mentioned here to define priority
   - Install neovim: `code --install-extension asvetliakov.vscode-neovim`
-
+- use vim_vscode_extension in github.dev as it does not support neovim_vscode_extension
+  - disable vimimum_chrome_extension on github.dev, as it creates keys conflict with vim_vscode_extension
 ```json
 [
   {

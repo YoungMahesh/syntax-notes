@@ -6,7 +6,10 @@ Cntr + f  # move cursor one letter forward
 Cntr + b  # move cursor one letter backward
 Cntr + p  # move to previous command in history
 Cntr + n  # move to next command in history
-
+Alt + 1   # move to first tab
+Alt + 2   # move to second tab
+Cntr + Shift + t  # create new tab
+Cntr + Shift + w  # close current tab
 
 #------------------------------ user management --------------------------------------------
 useradd -m mahesh # create user named mahesh, # -m == create user's home folder
@@ -145,8 +148,9 @@ crontab -e    # edit cronjob file
 * * * * * cd /path/to/folder && <command>
 ```
 
-### my ubuntu 22.04 setup
+## my ubuntu 22.04 setup
 
+### install apps
 ```bash
 sudo apt update && sudo apt upgrade
 sudo apt install git pass chrome-gnome-shell autojump
@@ -154,6 +158,19 @@ sudo apt install git pass chrome-gnome-shell autojump
 # install telegram, extensions for built-in `Ubuntu Software` app
 # setup `soft brightness plus` & `neovim` by following documentation
 ```
+
+### default keyboard shortcuts
+- `Super` - view Activities
+- `Alt+Tab` - switch windows 
+
+- notes
+  - redragon keyboard: `Super+Fn` locks `Super` key
+ 
+### custom keyboard shortcuts
+- settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts
+  - switch to workspace 1: `Alt+8`
+  - switch to workspace 2: `Alt+9`
+  - switch to workspace 3: `Alt+0`
 
 ### font
 ```bash
