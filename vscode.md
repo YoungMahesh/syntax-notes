@@ -56,7 +56,9 @@ Cntr + P    # open command palette
   "files.associations": {
     "*.json": "jsonc"
   },
-  "update.mode": "none"
+  "update.mode": "none",
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.renderSideBySide": false,
 }
 ```
 
