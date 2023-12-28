@@ -79,6 +79,7 @@ Cntr + P    # open command palette
 - use vim_vscode_extension in github.dev as it does not support neovim_vscode_extension
   - disable vimimum_chrome_extension on github.dev, as it creates keys conflict with vim_vscode_extension
 ```json
+// Place your key bindings in this file to override the defaults
 [
   {
     "key": "ctrl+shift+o",
@@ -148,6 +149,11 @@ Cntr + P    # open command palette
     "key": "ctrl+f",
     "command": "actions.find",
     "when": "editorFocus || editorIsOpen"
-  }
+  },
+  {
+    "key": "ctrl+o",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
 ]
 ```
