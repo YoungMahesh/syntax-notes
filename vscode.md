@@ -1,23 +1,24 @@
+- for vscode-version: 1.85.0
+
+### basic interaction
 ```bash
 #------------------- Explorer/Files-section ---------------------------
 Cntr + E  # move to files/explorer-section
-j   # move downward
-k   # move upward
+j         # move downward in explorer
+k         # move upward in explorer
+Cntr + `  # move to terminal
 
-#--------------------- Terminal --------------------------------------
-Cntr + `    # move to terminal
-Cntr + ~    # open new terminal window
+#------------------- Global search ---------------------------
+Cntr + Shift + f # search text in all files of opened directory
+Fn4              # move forward in global search results
+Shift + Fn4      # move backward in global search results
+Enter            # move cursor to current global search result
 
 #--------------------- Text Editor ----------------------------------
 Cntr + 1    # move to text editor
 Cntr + p    # search files by name in current directory
 Cntr + P    # open command palette
 ```
-
-### locations
-
-- List of non-default keybindings: `/home/mahesh/.config/Code/User/keybindings.json`
-  - If you wish to add, remove or modify non-default keybindigs update this file
 
 ### disable syntax warnings
 
@@ -32,7 +33,7 @@ Cntr + P    # open command palette
 "javascript.validate.enable": false,
 ```
 
-### my vscode settings
+### custom settings
 
 - Update: `Cntr+shift+p -> Preferenes: Open User Settings(JSON)` or `~/.config/Code/User/settings.json`
 - Install extensions: `code --install-extension esbenp.prettier-vscode NomicFoundation.hardhat-solidity golang.Go`
@@ -62,14 +63,7 @@ Cntr + P    # open command palette
 }
 ```
 
-### default vscode binding
-- global search 
-  - `Cntr + Shift + f`: search text in all files of opened directory
-  - `Fn4`: move forward in global search results
-  - `Shift + Fn4`: move backward in global search results
-  - `Enter`: move cursor to current global search result
-
-### my custom vscode keybindings
+### custom keybindings
 
 - Update: `Cntr+shift+p -> Preferenes: Open Keyboard Shortcuts(JSON)` or `~/.config/Code/User/keybindings.json`
 - neovim
@@ -155,7 +149,7 @@ Cntr + P    # open command palette
     "command": "editor.action.revealDefinition",
     "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
   },
-  {
+  { // use line-comments(//), by default vscode is using block-comments(/**/) when multiple lines are selected
     "key": "ctrl+/",
     "command": "editor.action.commentLine",
     "when": "editorTextFocus && !editorReadonly"
