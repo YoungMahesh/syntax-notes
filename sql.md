@@ -1,4 +1,5 @@
 # sql commands
+- prefer `TIMESTAMP` over `DATETIME` in mysql, as timestamp stores date, time in UTC timezone, while datetime does not store timezone
 
 ```sql
 --------------------- database (mysql, postgresql) -------------------------
@@ -57,7 +58,7 @@ ALTER TABLE wallets ADD COLUMN sp_id INTEGER REFERENCES sponsors(id);
 
   2. Foreign Key (FK): A foreign key is a column or a set of columns in a table that refers to the primary key of another table. It establishes a link between the two tables.
 
-- When you define a foreign key in a table, you are essentially creating a relationship between the table with the foreign key and the table with the primary key.
+- When you define a foreign key in a table, you are essentially creating a relationship between the table with the foreign key and the table with the pr  imary key.
 
   - This relationship helps maintain referential integrity, ensuring that the values in the foreign key column(s) correspond to existing values in the primary key column(s) of the referenced table.
 
