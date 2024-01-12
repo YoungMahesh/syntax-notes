@@ -63,6 +63,8 @@ export EDITOR=nvim  # set variable `EDITOR` with `nvim` as it's value, `export` 
 PATH="${PATH:+${PATH}:}~/opt/bin"   # appending
 PATH="~/opt/bin${PATH:+:${PATH}}"   # prepending
 
+# change directory-name color to orange (blue is difficult for eye to see)
+export LS_COLORS="$LS_COLORS:di=38;5;208"
 #-------------------------- file content handling ---------------------------------------------------------
 cat file1       # print data from file1 (cat = concatenation)
 cat > file1     # data typed after this comand will be the content of the file1
