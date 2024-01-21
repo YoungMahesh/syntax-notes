@@ -1,3 +1,9 @@
+### openssl
+```bash
+openssl rand -hex 10  # generate random password of 10 characters
+```
+
+### gpg
 ```bash
 gpg --gen-key  # generate new key
 gpg --list-keys # list public-addresses of public-keys stored on machine 
