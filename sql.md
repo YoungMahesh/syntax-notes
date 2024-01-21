@@ -196,6 +196,12 @@ WHERE "id" = 4;
 
 # mysql
 
+```bash
+# backup dtabase
+mysqldump -h example.com -P 3306 -u <user> -p<password> <database-name> > ./backup1.sql
+# -h == host, -P == port
+```
+
 ### phpmyadmin docker container
 - increase phpmyadmin file upload limit:
   - add this to env: `UPLOAD_LIMIT=500M`, here `M == MegaBytes`
