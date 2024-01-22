@@ -166,5 +166,10 @@ Cntr + P    # open command palette
     "command": "editor.action.commentLine",
     "when": "editorTextFocus && !editorReadonly"
   },
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
 ]
 ```
