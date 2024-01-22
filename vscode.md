@@ -46,14 +46,26 @@ Cntr + P    # open command palette
   "window.titleBarStyle": "custom",
   "workbench.editor.enablePreview": false, // open page always in new tab
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "terminal.integrated.sendKeybindingsToShell": true, // cannot close terminal with vscode-shortcut, if enabled
+  "workbench.startupEditor": "none",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "solidity.telemetry": true,
   "[solidity]": {
     "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
   },
+  "[xml]": {
+    "editor.defaultFormatter": "mikeburgh.xml-format"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
-  "terminal.integrated.sendKeybindingsToShell": true,
-  "workbench.startupEditor": "none",
+  "git.openRepositoryInParentFolders": "never",
   "files.associations": {
     "*.json": "jsonc"
   },
