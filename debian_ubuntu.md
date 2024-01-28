@@ -161,6 +161,11 @@ sudo apt install git pass chrome-gnome-shell autojump
 # setup `soft brightness plus` & `neovim` by following documentation
 ```
 
+### ui modifications
+- open terminal window full-screen
+  - open terminal-desktop file: `sudo nvim /usr/share/applications/org.gnome.Terminal.desktop`
+  - append `--maximize` to line starting with Exec as: `Exec=gnome-terminal --maximize`
+
 ### default keyboard shortcuts
 - `Super` - view Activities
 - `Alt+Tab` - switch windows 
