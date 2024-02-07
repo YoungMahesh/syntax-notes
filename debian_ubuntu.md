@@ -15,6 +15,10 @@ Cntr + Shift + w  # close current tab
 useradd -m mahesh # create user named mahesh, # -m == create user's home folder
 passwd mahesh # set password for user mahesh
 
+# hide user from ubuntu-ui (Ubuntu_v22.04)
+#   1. change value of variable `SystemAccount` to `true` in `/var/lib/AccountsService/users/<user-name>`
+#   2. execute: `sudo systemctl restart accounts-daemon.service`
+
 # user's group management
 groups mahesh # list of groups of user mahesh
 getent group docker # check list of users in group docker
