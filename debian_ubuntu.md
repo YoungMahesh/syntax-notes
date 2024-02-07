@@ -22,6 +22,10 @@ usermod -aG docker mahesh  # add user mahesh to group docker, -a == append, -G =
 usermod -aG sudo mahesh # add user to `sudo` group
 # changes to sudo group may not take effect immediately, user need to logout and login to get sudo privilages
 
+# switch between root and user
+sudo -i  # switch to root user
+su mahesh # switch to user `mahesh`
+
 #------------------------------ file management --------------------------------------------
 pwd           # print present-working-directory/current-folder
 cd            # change-folder to home folder ($HOME)
