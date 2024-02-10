@@ -1,4 +1,11 @@
 ```bash
+#------------------------------ server-management ----------------------------
+free -h  # check RAM/memory stats of server
+# buff/cache refers to a portion of memory maintained by the operating system and used for "page cache" - used for caching the content of files to speed up disk IO. 
+# This is memory that, if needed, can be freed for other purposes - that's why you also see a lot of memory in the available column, it's the responsibility of the kernel to manage this
+
+docker stats --no-stream # check memory consumed by docker containers
+
 #------------------------------ terminal ----------------------------
 Cntr + a  # move cursor to start of the line
 Cntr + e  # move cursor to end of the line
