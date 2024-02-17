@@ -18,24 +18,6 @@ Alt + 2   # move to second tab
 Cntr + Shift + t  # create new tab
 Cntr + Shift + w  # close current tab
 
-#------------------------------ user management --------------------------------------------
-useradd -m mahesh # create user named mahesh, # -m == create user's home folder
-passwd mahesh # set password for user mahesh
-
-# hide user from ubuntu-ui (Ubuntu_v22.04)
-#   1. change value of variable `SystemAccount` to `true` in `/var/lib/AccountsService/users/<user-name>`
-#   2. execute: `sudo systemctl restart accounts-daemon.service`
-
-# user's group management
-groups mahesh # list of groups of user mahesh
-getent group docker # check list of users in group docker
-usermod -aG docker mahesh  # add user mahesh to group docker, -a == append, -G == group-name
-usermod -aG sudo mahesh # add user to `sudo` group
-# changes to sudo group may not take effect immediately, user need to logout and login to get sudo privilages
-
-# switch between root and user
-sudo -i  # switch to root user
-su mahesh # switch to user `mahesh`
 
 #------------------------------ file management --------------------------------------------
 pwd           # print present-working-directory/current-folder

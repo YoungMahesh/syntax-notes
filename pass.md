@@ -13,7 +13,7 @@ pass edit github/personal  # edit password or add metadata
 # metadata such as email, address etc, will go on any line below password line
 # first line is for password, all other lines for metadata
 
-# if you are getting warnging: There is no assurance this key belongs to the named user: change trust of gpg-key as mentiond in ./gpg.md
+# if you are getting warnging: There is no assurance this key belongs to the named user: change trust of gpg-key as mentiond in ./encryption.md
 
 pass rm github/personal  # remove password
 pass git log  # changes made until now
