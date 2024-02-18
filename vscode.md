@@ -72,6 +72,10 @@ Cntr + P    # open command palette
   "update.mode": "none",
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.renderSideBySide": false,
+  "terminal.integrated.commandsToSkipShell": [
+    "github.copilot.terminal.suggestCommand",
+    "-workbench.action.quickOpen"  // ctrl+p for previous-command instead of quick-open while in terminal
+  ],
 }
 ```
 
