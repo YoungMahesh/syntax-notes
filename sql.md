@@ -1,4 +1,5 @@
 # sql commands
+
 - prefer `TIMESTAMP` over `DATETIME` in mysql, as timestamp stores date, time in UTC timezone, while datetime does not store timezone
 
 ```sql

@@ -1,6 +1,7 @@
-- for vscode-version: 1.85.0
+# vscode-version: 1.85.2
 
 ### basic interaction
+
 ```bash
 #------------------- Explorer/Files-section ---------------------------
 Cntr + E  # move to files/explorer-section
@@ -24,9 +25,9 @@ Cntr + P    # open command palette
 
 - sometimes to review code, we download it and read it inside vscode without installing dependencies like node_modules, if code is written in typescript or javascript then it leads to syntax warnings in vscode
 - we can disable those warning by
-  1.  open command pallete (`Cntr + Shift + p`)
-  2.  open workspace settings (JSON)
-  3.  disable typescript and javscript validation by adding these lines
+  1. open command pallete (`Cntr + Shift + p`)
+  2. open workspace settings (JSON)
+  3. disable typescript and javscript validation by adding these lines
 
 ```json
 "typescript.validate.enable": false,
@@ -44,9 +45,7 @@ Cntr + P    # open command palette
   "workbench.sideBar.location": "right",
   "files.autoSave": "onFocusChange",
   "window.titleBarStyle": "custom",
-  "workbench.editor.enablePreview": false, // open page always in new tab
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // "terminal.integrated.sendKeybindingsToShell": true, // cannot close terminal with vscode-shortcut, if enabled
   "workbench.startupEditor": "none",
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
@@ -70,12 +69,11 @@ Cntr + P    # open command palette
     "*.json": "jsonc"
   },
   "update.mode": "none",
-  "diffEditor.hideUnchangedRegions.enabled": true,
-  "diffEditor.renderSideBySide": false,
   "terminal.integrated.commandsToSkipShell": [
-    "github.copilot.terminal.suggestCommand",
-    "-workbench.action.quickOpen"  // ctrl+p for previous-command instead of quick-open while in terminal
+    "-workbench.action.quickOpen" // ctrl+p for previous-command instead of quick-open while in terminal
   ],
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "workbench.editor.enablePreview": false,
 }
 ```
 
@@ -88,6 +86,7 @@ Cntr + P    # open command palette
   - Install neovim: `code --install-extension asvetliakov.vscode-neovim`
 - use vim_vscode_extension in github.dev as it does not support neovim_vscode_extension
   - disable vimimum_chrome_extension on github.dev, as it creates keys conflict with vim_vscode_extension
+
 ```json
 // Place your key bindings in this file to override the defaults
 [
@@ -165,7 +164,7 @@ Cntr + P    # open command palette
     "command": "editor.action.revealDefinition",
     "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
   },
-  { // use line-comments(//), by default vscode is using block-comments(/**/) when multiple lines are selected
+  {
     "key": "ctrl+/",
     "command": "editor.action.commentLine",
     "when": "editorTextFocus && !editorReadonly"
@@ -174,6 +173,10 @@ Cntr + P    # open command palette
     "key": "ctrl+t",
     "command": "workbench.action.terminal.toggleTerminal",
     "when": "terminal.active"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.closeOtherEditors"
   },
 ]
 ```
