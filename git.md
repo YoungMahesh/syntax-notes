@@ -1,3 +1,23 @@
+## hooks
+
+### post-commit
+
+1. describe post-commit hook
+
+    ```bash
+    # create-file-at .git/hooks/post-commit, this file will execute whenever you git-commit
+    #!/bin/sh
+    git push 
+    ```
+
+2. make post-commit executable
+    ```bash
+    chmod +x .git/hooks/post-commit
+    ```
+
+
+## basic commands
+
 ```bash
 git init # create git-repository in present working directory 
 rm -rf .git  # remove git-repository from present-working-directory 
@@ -96,7 +116,7 @@ git checkout tags/<version> -b <branch-name>  # switch to a tag and create bracn
 ```
 
 
-### lazygit
+## lazygit
 ```bash
 lazygit  # execute inside repository to view git
 q        # save changes & quit lazygit
