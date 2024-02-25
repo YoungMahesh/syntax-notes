@@ -147,39 +147,3 @@ crontab -e    # edit cronjob file
 * * * * * cd /path/to/folder && <command>
 ```
 
-## my ubuntu 22.04 setup
-
-### install apps
-```bash
-sudo apt update && sudo apt upgrade
-sudo apt install git pass chrome-gnome-shell autojump
-# install google-chrome, vscode from official websites
-# install telegram, extensions for built-in `Ubuntu Software` app
-# setup `soft brightness plus` & `neovim` by following documentation
-```
-
-### ui modifications
-- open terminal window full-screen
-  - open terminal-desktop file: `sudo nvim /usr/share/applications/org.gnome.Terminal.desktop`
-  - append `--maximize` to line starting with Exec as: `Exec=gnome-terminal --maximize`
-
-### default keyboard shortcuts
-- `Super` - view Activities
-- `Alt+Tab` - switch windows 
-
-- notes
-  - redragon keyboard: `Super+Fn` locks `Super` key
- 
-### custom keyboard shortcuts
-- settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts
-  - switch to workspace 1: `Alt+8`
-  - switch to workspace 2: `Alt+9`
-  - switch to workspace 3: `Alt+0`
-
-### font
-```bash
-fc-list  # list all fonts on the computer
-# download font from a font website such as: https://www.nerdfonts.com/font-downloads
-# copy folder or .ttf file to `/usr/share/fonts` directory
-fc-list | grep "CodeNewRoman"  # verify font (here CodeNewRoman) is installed on system
-```
