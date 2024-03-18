@@ -23,9 +23,7 @@ sudo apt install git pass chrome-gnome-shell autojump stow
 - `Super` - view Activities
 - `Alt+Tab` - switch windows 
 
-- notes
-  - redragon keyboard: `Super+Fn` locks `Super` key
- 
+
 ### custom keyboard shortcuts
 
 - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts
