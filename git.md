@@ -95,8 +95,8 @@ git pull <remote_area_name> <branch_name> # merge remote branch to current branc
 git clone <remote_area_url> # copy git repository from remote server/area to current folder
 
 # for https-url
-git config --global credential.helper cache   # save github password so you don't have to type it again
-git config --global --unset credential.helper  # remove cached credentials
+git config credential.helper store # save remote repository credentials (username, password) permanently
+git config credential.helper cache   # save remote repository credentials temporarity (15 minutes)
 
 # ------------------------ branch management ----------------------------------
 git branch <branch-name> # Create a new branch containing all git commits of current git-branch
