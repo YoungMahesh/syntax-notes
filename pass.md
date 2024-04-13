@@ -21,6 +21,9 @@ pass git revert HEAD   # remove last changes
 # every edit, remove, generate, insert command of pass creates a new git-commit
 # revert helps when you want to revert last update you made in `pass`
 
+# lock pass content immediately by restarting gpg
+gpg-connect-agent reloadagent /bye
+
 # ------------------------------- Initialize --------------------------------------------------
 # create or import gpg keys: read `gpg.md` file
 gpg -k  # get gpg keys
