@@ -44,3 +44,28 @@ pass git init
 git clone <pass-repository-url> ~/.password-store  # here we are cloning pass-repo in `.password-store`
 # `~/.password-store` is the default directory for `pass`
 ```
+
+
+### multiple pass
+1. login to a different user account: `su -l <username>`
+
+2. append to `.bashrc` file
+    ```bash
+    # set nvim as default editor for pass
+    export EDITOR=nvim
+
+    # need to execute `script /dev/null` to make pass work in other user-account shell
+    # following script automatically execute `script /dev/null` on login
+    if [ -z "$SCRIPT" ]; then
+        SCRIPT=/dev/null script -q
+    fi
+    ```
+
+- create new user if not already availble
+    ```bash
+    su -l <username> # login to diffrent user
+    # setup new user on your ubuntu computer 
+    useradd -m <username>  # create a new user
+    passwd <username>  # set password for user
+    ```
+
