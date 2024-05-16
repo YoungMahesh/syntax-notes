@@ -16,6 +16,9 @@ usermod -aG sudo mahesh # add user to sudo group
  
 # hide user from ubuntu-login-ui (Ubuntu_v22.04)
 #   1. change value of variable `SystemAccount` to `true` in `/var/lib/AccountsService/users/<user-name>`
+    sudo -s   # you cannot use `sudo` and cd together, so switch to root user first 
+    cd /var/lib/AccountsService/users/<user-name>
+    Ctrl+d  # exit from root user
 #   2. execute: `sudo systemctl restart accounts-daemon.service`
 
 
