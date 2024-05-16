@@ -34,7 +34,17 @@ gpg --output private.pgp --armor --export-secret-key <gpg-public-key>
 # import on machine 2
 gpg --import public.pgp  # if you have imported private-key, public-key will be generated automatically
 gpg --import private.pgp
+# if error in importing private-key as follows:
+# gpg: key <public-key>: error sending to agent: Permission denied
+# gpg: error building skey array: Permission denied
+# gpg: error reading 'private.pgp': Permission denied
+# gpg: import from 'private.pgp' failed: Permission denied
+# then import as
+gpg --import --pinentry-mode loopback  private.pgp
 
+# gpg may not work immediately if you imported in newly created user-account, execute following command to make it work
+# you may encounter some error like: gpg: decryption failed: No secret key
+script /dev/null
 
 # -------------- enable trust -------------------------
 gpg --edit-key <KEY_ID>

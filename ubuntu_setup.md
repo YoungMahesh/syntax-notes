@@ -7,10 +7,8 @@ sudo apt update && sudo apt upgrade
 sudo apt install git pass chrome-gnome-shell autojump stow
 # install google-chrome, vscode from official websites
 # install telegram, extensions for built-in `Ubuntu Software` app
-# setup `soft brightness plus` & `neovim` by following documentation
+# setup `soft brightness plus` & `neovim` by following documentation in dotfiles repository
 ```
-
-- neovim-install: https://github.com/neovim/neovim/wiki/Installing-Neovim#appimage-universal-linux-package
 
 ### ui modifications
 

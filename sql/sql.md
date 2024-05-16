@@ -8,40 +8,42 @@ CREATE DATABASE Databasename;
 SHOW DATABASES;
 USE Databasename;
 SELECT version();
------------------------ table ------------------------
-SHOW TABLES;
--- CREATE TABLE table (field1 type1, field2 type2);
-CREATE TABLE raffle (orderId VARCHAR(255) amount(255));
-CREATE TABLE sponsors (id integer PRIMARY KEY AUTOINCREMENT NOT NULL);  -- create table with column-id in libsql
 
-TRUNCATE TABLE <table-name>;  -- delete all records from Table
-DROP TABLE table_name
-
----------------------- columns ------------------------------
+---------------------- create-column ------------------------------
 -- ALTER TABLE table_name ADD COLUMN new_column_name data_type;
 ALTER TABLE sponsors ADD name text;
 ALTER TABLE sponsors ADD created_at text DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE wallets ADD COLUMN sponser_id INTEGER DEFAULT 1;
-ALTER TABLE table_name DROP COLUMN column_name; -- delete column
 PRAGMA table_info(table_name);  -- formatted schema of table
-ALTER TABLE table_name RENAME COLUMN column_name TO new_column_name; -- rename column
--- ALTER TABLE table_name ADD column_name datatype;
+
+--- alter-column ---------------------
+-- change enum types
+ALTER TABLE table-name 
+MODIFY COLUMN column-name ENUM('a', 'b', 'c', 'd') NOT NULL,
+
+---- rename-column -----------------------------------
+ALTER TABLE table_name RENAME COLUMN column_name TO new_column_name; 
+
+-- delete column -------------
+ALTER TABLE table_name DROP COLUMN column_name; 
+
+---- constraints-on-column -----------------------------------
 ALTER TABLE table_name ADD UNIQUE (column_name_1, column_name_2); -- combination of two values should be unique
 
------------------------- read rows --------------------------------------
+------------------------ read-rows --------------------------------------
 SELECT * FROM table;  -- see contents of table
 SELECT * FROM tablename1 LIMIT 10;  -- check content from all columns of table (max 10)
 SELECT column1, column2 FROM tablename1 LIMIT 10;  -- check content from column1,column2 of table (max 10)
 SELECT COUNT(*) FROM tablename1;  -- count number of rows in table
 
------------------------- write rows --------------------------------------
+------------------------ write-rows --------------------------------------
 --INSERT INTO table1 (field1, field2) VALUES (value1, value2);
 INSERT INTO sponsors (name) VALUES ('jonah');
 
 -- delete rows from table `orders` where id is 3 or 4 or 5 or 6
 DELETE FROM orders WHERE id IN (3,4,5,6);
 
--- UPDATE table-name SET insert_into_column = from_column
+-- copy-column: UPDATE table-name SET insert_into_column = from_column
 UPDATE wallets SET column2 = column1 -- copy data from column1 to column2 in wallets-table
 
 
@@ -54,6 +56,16 @@ SELECT * FROM "UserCred";
 SELECT "Cart"
 SET "totalPrice" = 15
 WHERE "id" = 4;
+
+----------------------- table ------------------------
+SHOW TABLES;
+-- CREATE TABLE table (field1 type1, field2 type2);
+CREATE TABLE raffle (orderId VARCHAR(255) amount(255));
+CREATE TABLE sponsors (id integer PRIMARY KEY AUTOINCREMENT NOT NULL);  -- create table with column-id in libsql
+
+TRUNCATE TABLE <table-name>;  -- delete all records from Table
+DROP TABLE table_name
+
 ```
 
 ### sql cli commands

@@ -25,7 +25,7 @@ pass git revert HEAD   # remove last changes
 gpg-connect-agent reloadagent /bye
 
 # ------------------------------- Initialize --------------------------------------------------
-# create or import gpg keys: read `gpg.md` file
+# create or import gpg keys: read `encryption.md` file
 gpg -k  # get gpg keys
 # pub   rsa3072 2023-09-11 [SC] [expires: 2025-09-10]
 #      525A4CCA5D86AE842D9A51C3DF39BF4C371A2ADD
