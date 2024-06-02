@@ -24,10 +24,13 @@ sudo apt install git pass chrome-gnome-shell autojump stow
 
 ### custom keyboard shortcuts
 
-- settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts
-  - switch to workspace 1: `Alt+8`
-  - switch to workspace 2: `Alt+9`
-  - switch to workspace 3: `Alt+0`
+- settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Navigation
+  - Switch to workspace 1: Alt+8
+  - Switch to workspace 2: Alt+9
+  - Switch to workspace 3: Alt+0
+- settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Windows
+  - View split on left: Super+a
+  - View split on right: Super+d
 
 ### font
 
