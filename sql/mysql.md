@@ -20,4 +20,12 @@ values ('task m1', 130.33, date_add(current_timestamp, interval 1 day)); -- expi
 
 alter table info1
 add unique index unique_info1_name(name);
+
+
+create table info2(
+   info1_id int not null
+);
+alter table info2 
+add constraint fk_info2_info1
+foreign key (info1_id) references info1(id);  -- forign key have table scope (foreign needs to be within table, but need not to be unique in whole database)
 ```
