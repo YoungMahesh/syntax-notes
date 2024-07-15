@@ -9,6 +9,8 @@ create table info1(
   created_at timestamp not null default current_timestamp,
   expiry_at timestamp not null
 );
+rename table info1 to info3;
+drop table info1;
 
 alter table info 
 modify column name varchar(42) not null;  
@@ -30,8 +32,6 @@ alter table info2
 add constraint fk_info2_info1
 foreign key (info1_id) references info1(id);  
 -- forign key have table scope (foreign needs to be within table, but need not to be unique in whole database)
-
-
 
 
 ------------------------------ JOIN ON ----------------------------------------------
