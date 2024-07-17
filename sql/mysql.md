@@ -7,6 +7,7 @@ create table info1(
   status enum('verified', 'rejected', 'pending') not null default 'pending',
   wallet_address varchar(42) null default null,
   created_at timestamp not null default current_timestamp,
+  updated_at timestamp not null default current_timestamp on update current_timestamp,
   expiry_at timestamp not null
 );
 rename table info1 to info3;
@@ -19,6 +20,15 @@ add column recipient varchar(42) not null default '' after amount; -- `after amo
 
 insert into info1 (name, amount, expiry_at)
 values ('task m1', 130.33, date_add(current_timestamp, interval 1 day)); -- expires after 1 day from current time
+
+insert into info1(name, amount)
+values
+    ('row1', 10),
+    ('row2', 20),
+    ('row3', 30);
+
+delete from info1; -- delete all rows from table info1
+
 
 alter table info1
 add unique index unique_info1_name(name);
