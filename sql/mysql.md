@@ -73,6 +73,7 @@ foreign key (info1_id) references info1(id);
 
 
 ------------------------------ JOIN ON ----------------------------------------------
+
 SELECT columns  -- select given columns
 FROM table1     -- from table1
 JOIN table2     -- wait, first look at table2
@@ -94,5 +95,38 @@ select info1.id, info1.name
 from info1
 join joint_table ON info1.id = joint_table.info1_id  -- join without prefix == inner join
 where joint_table.info2_id = [specific_info2_id];
+
+
+------------------------------ UNION ---------------------------------------------- 
+-- UNION removes duplicate rows from the final result set.
+-- UNION ALL keeps all rows, including duplicates.
+
+(SELECT 
+    'debit' AS type,
+    CONCAT('d-', df.id) AS unique_id,
+    df.amount,
+    df.created_at
+FROM 
+    distributed_funds df
+JOIN 
+    donation d ON df.transaction_id = d.id
+WHERE 
+    d.donor_id = 15)
+
+UNION ALL
+
+(SELECT 
+    'credit' AS type,
+    CONCAT('c-', d.id) AS unique_id,
+    d.currency_amt AS amount,
+    d.created_at
+FROM 
+    donation d
+WHERE 
+    d.donor_id = 15)
+
+ORDER BY 
+    created_at ASC
+LIMIT 10;
 ```
 
