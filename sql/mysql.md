@@ -48,6 +48,9 @@ alter table info1
 add column recipient varchar(42) not null default '' after amount; -- `after amount` == put column after column 'amount'
 
 alter table info1
+add column id int auto_increment primary key first;  -- 'first' == put column as first column
+
+alter table info1
 modify column name varchar(42) not null;
 
 alter table info1
@@ -72,7 +75,7 @@ foreign key (info1_id) references info1(id);
 -- forign key have table scope (foreign needs to be within table, but need not to be unique in whole database)
 
 
------------------------------- JOIN ON ----------------------------------------------
+------------------------------ single JOIN ON ----------------------------------------------
 
 SELECT columns  -- select given columns
 FROM table1     -- from table1
@@ -96,6 +99,14 @@ from info1
 join joint_table ON info1.id = joint_table.info1_id  -- join without prefix == inner join
 where joint_table.info2_id = [specific_info2_id];
 
+
+------------------------------ double JOIN ON ----------------------------------------------
+
+SELECT DISTINCT service_request.*
+FROM service_request
+JOIN distributed_funds ON service_request.id = distributed_funds.service_request_id
+JOIN donation ON distributed_funds.donation_id = donation.id
+WHERE donation.donor_id = 3;
 
 ------------------------------ UNION ---------------------------------------------- 
 -- UNION removes duplicate rows from the final result set.
