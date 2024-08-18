@@ -27,9 +27,12 @@ where amount > 100      -- amount column from transaction-table
 ORDER BY created_at ASC -- created_at column from transaction-table
 LIMIT 20, 10;
 
--- count rows in transactions-table
+-- count rows 
 SELECT COUNT(*) AS total_count
 FROM transactions;
+
+-- get sum of all values in column 
+select sum(amount) as total_info1_amt from info1;
 
 ----------------------------- create rows --------------------------------------
 
