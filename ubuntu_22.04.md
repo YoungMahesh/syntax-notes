@@ -26,12 +26,18 @@ sudo apt install git pass chrome-gnome-shell autojump stow
 - `Alt+Tab` - switch windows 
 
 
-### custom keyboard shortcuts
-
-- settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Navigation
-  - Switch to workspace 1: Alt+8
-  - Switch to workspace 2: Alt+9
-  - Switch to workspace 3: Alt+0
+### gnome custom keyboard shortcuts (24.04)
+- move current app 
+    - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Navigation
+        - move window to workspace 1: Alt+1
+        - move window to workspace 2: Alt+2
+        - move window to workspace 3: Alt+3
+- switch workspace
+    - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Navigation
+        - move window to workspace 1: Super+1
+        - move window to workspace 2: Super+2
+        - move window to workspace 2: Super+3
+    - in ubuntu-24.04 this was not working, until i disabled `Extensions -> Ubuntu Dock`
 - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Windows
   - View split on left: Super+a
   - View split on right: Super+d
