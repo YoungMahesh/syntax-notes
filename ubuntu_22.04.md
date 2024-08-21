@@ -8,10 +8,6 @@
 lsb_release -a
 
 sudo apt update && sudo apt upgrade
-sudo apt install git pass chrome-gnome-shell autojump stow
-# install google-chrome, vscode from official websites
-# install telegram, extensions for built-in `Ubuntu Software` app
-# setup `soft brightness plus` & `neovim` by following documentation in dotfiles repository
 ```
 
 ### ui modifications
@@ -24,6 +20,7 @@ sudo apt install git pass chrome-gnome-shell autojump stow
 
 - `Super` - view Activities
 - `Alt+Tab` - switch windows 
+- `Super+l` - lock os (better than logout)
 
 
 ### gnome custom keyboard shortcuts (24.04)

@@ -10,6 +10,7 @@ create table info1(
   wallet_address varchar(42) null default null,
   created_at timestamp not null default current_timestamp,
   updated_at timestamp not null default current_timestamp on update current_timestamp,
+  birth_date date not null,
   expiry_at timestamp not null
 );
 
@@ -48,7 +49,8 @@ values
 -------------------------- column --------------------------
 
 alter table info1
-add column recipient varchar(42) not null default '' after amount; -- `after amount` == put column after column 'amount'
+add column recipient varchar(42) not null default '' after amount, -- `after amount` == put column after column 'amount'
+add column name varchar(50) not null;
 
 alter table info1
 add column id int auto_increment primary key first;  -- 'first' == put column as first column
