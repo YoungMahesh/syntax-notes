@@ -35,6 +35,11 @@ FROM transactions;
 -- get sum of all values in column 
 select sum(amount) as total_info1_amt from info1;
 
+
+-------------------------- update rows ------------------------------------
+
+update ticket set status = 'approved-1' where status = 'verified';
+
 ----------------------------- create rows --------------------------------------
 
 insert into info1 (name, amount, expiry_at)
