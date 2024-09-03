@@ -1,14 +1,6 @@
 ## Assign domains
 
-### Configure domain provider
 
-1. Visit your domain-provider (e.g. `domains.google.com`)
-1. Go to `DNS` -> `Default name servers` -> `Custom records` -> `Manage custom records`
-1. create record as
-   - Host name: name of subdomain, e.g. `whoami` for `whoami.example.com`, keep empty if you are going to use main domain like `example.com`
-   - Type: `A`
-   - Data or Target: ip-address of your server/vps, e.g. `76.76.21.21`
-   - Keep value of `TTL` as it is
 
 ### Assigning a Domain to a Container
 
@@ -43,6 +35,8 @@
        labels:
          - "traefik.enable=true"
          - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+         # multiple domain support
+         - "traefik.http.routers.whoami.rule=Host(`whoami.com`) || Host(`whoami2.com`) || Host(`www.whoami.com`)"
          - "traefik.http.routers.whoami.entrypoints=web"
    ```
 
