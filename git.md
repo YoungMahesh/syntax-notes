@@ -4,25 +4,26 @@
 
 1. describe post-commit hook
 
-    ```bash
-    # create-file-at .git/hooks/post-commit, this file will execute whenever you git-commit
-    #!/bin/sh
-    git push 
-    ```
+   ```bash
+   # create-file-at .git/hooks/post-commit, this file will execute whenever you git-commit
+   #!/bin/sh
+   git push
+   ```
 
 2. make post-commit executable
-    ```bash
-    chmod +x .git/hooks/post-commit
-    ```
+   ```bash
+   chmod +x .git/hooks/post-commit
+   ```
 
 ### install latest version (officially)
+
 - https://git-scm.com/download/linux
 
 ## basic commands
 
 ```bash
-git init # create git-repository in present working directory 
-rm -rf .git  # remove git-repository from present-working-directory 
+git init # create git-repository in present working directory
+rm -rf .git  # remove git-repository from present-working-directory
 
 # ------------------------ configuration ----------------------------------
 # use --global flag, to update gobal-configuation file
@@ -65,7 +66,7 @@ git revert <commit_ID> # remove all changes in given 'commit_ID'
 git reset HEAD~1  # delete last commit and move changes from last-commit to working-area
 # HEAD~2 will delete latest 2 commits, HEAD~3 will delete latest 3-commits and so on..
 
-# change commit author 
+# change commit author
 git filter-branch --env-filter '
 OLD_EMAIL="old@gmail.com"
 CORRECT_NAME="person1"
@@ -81,7 +82,7 @@ then
     export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
 fi
 ' --tag-name-filter cat -- --branches --tags
-# `git filter-branch` command with an `env-filter` option, is used to rewrite the history of a Git repository in a specific way. 
+# `git filter-branch` command with an `env-filter` option, is used to rewrite the history of a Git repository in a specific way.
 # `--tag-name-filter cat`: specifies how tag names should be filtered. The `cat` filter means that tag names will not be changed. This is necessary because tags are pointers to commits, and since commits are being rewritten, tags need to be adjusted to point to the new commit SHAs.
 # `-- --branches --tags`: apply these changes to all branches and tags in the repository. The double dash `--` is used to separate the filter-branch options from the revision parameters.
 # After running this command, all commits in the repository that were made by the `OLD_EMAIL` will now appear to have been made by `CORRECT_NAME` with `CORRECT_EMAIL`. This is a form of rewriting history and is very useful if, for example, you committed to a repo using a wrong or outdated email address.
@@ -96,11 +97,16 @@ git fetch <remote_area_name> <branch_name> # copy branch remote_area to commit_a
 git pull <remote_area_name> <branch_name> # merge remote branch to current branch
 git clone <remote_area_url> # copy git repository from remote server/area to current folder
 
+# ----------------------------- store credentials -----------------------------
+git clone <repository-http-url> # you will be prompted to put username and password
+# set username
+git config credential.username xyz
+# set password/credintial
+git pull # you will be prompted to submit credentials only if credential.helper = cache ('cache' is default)
 git config credential.helper store # save remote repository credentials (username, password) permanently
-# if you get error: Repository not found, when you switch from credential.helper from 'cache' to 'store'
-# set username in credentials with: `git config credential.username xyz`
-# 'cache' is default credential.helper
-git config credential.helper cache   # save remote repository credentials temporarity (15 minutes)
+# to change config values edit -> ./.git/config
+# 'cache' stores credentials in memory, while 'store' stores it on  'disk'
+# location of 'store' credentials: `cat ~/.git-credentials`
 
 # ------------------------ branch management ----------------------------------
 git branch <branch-name> # Create a new branch containing all git commits of current git-branch
@@ -119,13 +125,13 @@ git fetch --all --tags  # fetch all tags from remote
 git checkout tags/<version> -b <branch-name>  # switch to a tag and create bracnh for it
 ```
 
-
 ## lazygit
+
 ```bash
 lazygit  # execute inside repository to view git
 q        # save changes & quit lazygit
 h        # move to previous section
-l        # move to next section  
+l        # move to next section
 ?        # open menu
 a        # stage all files
 d        # discard all changes of the selected file
