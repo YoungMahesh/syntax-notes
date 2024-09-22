@@ -16,7 +16,6 @@ create table info1(
 
 rename table info1 to info3;
 
-delete from info1; -- delete all rows from table info1
 
 drop table info1;   -- delete table info1
 
@@ -28,11 +27,11 @@ where amount > 100      -- amount column from transaction-table
 ORDER BY created_at ASC -- created_at column from transaction-table
 LIMIT 20, 10;
 
--- count rows 
+-- count rows
 SELECT COUNT(*) AS total_count
 FROM transactions;
 
--- get sum of all values in column 
+-- get sum of all values in column
 select sum(amount) as total_info1_amt from info1;
 
 
@@ -50,6 +49,15 @@ values
     ('row1', 10),
     ('row2', 20),
     ('row3', 30);
+
+-------------------------- delete rows ------------------------------------
+
+-- delete single row
+delete from info1
+where id = 3
+limit 1;
+
+delete from info1; -- delete all rows from table info1
 
 -------------------------- column --------------------------
 
@@ -118,36 +126,35 @@ JOIN distributed_funds ON service_request.id = distributed_funds.service_request
 JOIN donation ON distributed_funds.donation_id = donation.id
 WHERE donation.donor_id = 3;
 
------------------------------- UNION ---------------------------------------------- 
+------------------------------ UNION ----------------------------------------------
 -- UNION removes duplicate rows from the final result set.
 -- UNION ALL keeps all rows, including duplicates.
 
-(SELECT 
+(SELECT
     'debit' AS type,
     CONCAT('d-', df.id) AS unique_id,
     df.amount,
     df.created_at
-FROM 
+FROM
     distributed_funds df
-JOIN 
+JOIN
     donation d ON df.transaction_id = d.id
-WHERE 
+WHERE
     d.donor_id = 15)
 
 UNION ALL
 
-(SELECT 
+(SELECT
     'credit' AS type,
     CONCAT('c-', d.id) AS unique_id,
     d.currency_amt AS amount,
     d.created_at
-FROM 
+FROM
     donation d
-WHERE 
+WHERE
     d.donor_id = 15)
 
-ORDER BY 
+ORDER BY
     created_at ASC
 LIMIT 10;
 ```
-
