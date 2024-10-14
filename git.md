@@ -1,3 +1,11 @@
+## backup
+
+```bash
+# git archive -o <repo-name>.zip <branch-name>
+git archive -o repository.zip HEAD
+# -o == --output
+```
+
 ## hooks
 
 ### post-commit
