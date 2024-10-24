@@ -59,6 +59,8 @@ limit 1;
 
 delete from info1; -- delete all rows from table info1
 
+delete from info where name is null;
+
 -------------------------- column --------------------------
 
 alter table info1
