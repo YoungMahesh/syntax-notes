@@ -1,0 +1,3 @@
+- error (for itel feature phone while file transfer): One headset is already activated, please deactivate it first, to activate another
+  - solution: on itel feature phone, open Extra -> BT (bluetooth) -> Paired device -> hover on connected device
+    -> click center button to disconnect (this is will disconnect voice transport and enable file transfer)
