@@ -81,9 +81,13 @@ drop column name;
 
 ------------------------------- unique, foreign-key -----------------------------
 
+-- single column
 alter table info1
-add unique index unique_info1_name(name);
+add constraint unique_info1_name UNIQUE (name);
 
+-- combination of columns
+ALTER TABLE your_table_name
+add constraint unique_combination UNIQUE (column1, column2);
 
 create table info2(
    info1_id int not null
