@@ -98,6 +98,8 @@ add constraint fk_info2_info1
 foreign key (info1_id) references info1(id);
 -- forign key have table scope (foreign needs to be within table, but need not to be unique in whole database)
 
+alter table donation 
+drop foreign key donation_donor_id;
 
 ------------------------------ single JOIN ON ----------------------------------------------
 
@@ -123,6 +125,10 @@ from info1
 join joint_table ON info1.id = joint_table.info1_id  -- join without prefix == inner join
 where joint_table.info2_id = [specific_info2_id];
 
+
+update refund_request
+join donor on refund_request.user_id = user.id
+set refund_request.user_clerkid = user.clerk_id;
 
 ------------------------------ double JOIN ON ----------------------------------------------
 
