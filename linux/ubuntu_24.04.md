@@ -1,4 +1,4 @@
-# my ubuntu 22.04 setup
+# my ubuntu 24.04 setup
 
 
 ### install apps
@@ -24,16 +24,11 @@ sudo apt update && sudo apt upgrade
 
 
 ### gnome custom keyboard shortcuts (24.04)
-- move current app 
-    - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Navigation
-        - move window to workspace 1: Alt+1
-        - move window to workspace 2: Alt+2
-        - move window to workspace 3: Alt+3
 - switch workspace
     - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Navigation
-        - move window to workspace 1: Super+1
-        - move window to workspace 2: Super+2
-        - move window to workspace 2: Super+3
+        - switch to workspace 1: Super+1
+        - switch to workspace 2: Super+2
+        - switch to workspace 2: Super+3
     - in ubuntu-24.04 this was not working, until i disabled `Extensions -> Ubuntu Dock`
 - settings -> keyboard -> keyboard shortcuts -> View and Customize shortcuts -> Windows
   - View split on left: Super+a

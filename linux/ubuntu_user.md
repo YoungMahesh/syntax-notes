@@ -39,48 +39,6 @@ free -h  # check RAM/memory stats of server
 
 docker stats --no-stream # check memory consumed by docker containers
 
-#------------------------------ terminal ----------------------------
-Cntr + a  # move cursor to start of the line
-Cntr + e  # move cursor to end of the line
-Cntr + f  # move cursor one letter forward
-Cntr + b  # move cursor one letter backward
-Cntr + p  # move to previous command in history
-Cntr + n  # move to next command in history
-Alt + 1   # move to first tab
-Alt + 2   # move to second tab
-Cntr + Shift + t  # create new tab
-Cntr + Shift + w  # close current tab
-
-
-#------------------------------ file management --------------------------------------------
-pwd           # print present-working-directory/current-folder
-cd            # change-folder to home folder ($HOME)
-cd ..         # go to parent folder of current folder
-cd Documents  # go to folder 'Documents' present in current folder
-echo 'mahesh'     # print string -> mahesh
-echo $HOME        # print value of "HOME" environment-variable
-echo *s           # print all files in current folder ending with 's'
-echo *m*          # print all files in current folder containing word 'm'
-ls            # list files&folders in current folder
-ls --all      # list all files including hidden(.) files
-ls -l         # long(detailed) listing
-ls -l app.js  # get details of a single-file
-mkdir github      # create folder
-mv file1 file3  # rename 'file1' -> 'file3'
-mv file1 file3 dirName  # move 'file1', 'file3' to folder 'dirName'
-mv /path/folder1 ./folder2  # move folder1 to folder2
-mv /path/folder1/* /path/folder2   # move files&folders from folder1 to folder2
-cp file1 file2            # create copy of file1 -> as 'file2'
-cp file1 file2 dirName    # create copy of 'file1', 'file2' into folder 'dirName'
-cp -r folder1/* folder2   # copy all files&folders from folder1 to folder2
-du -sh <fileName>  # get size of folder
-du -sh *    # get sizes of all files and folder in current folder
-# -s == summerize, display total size for folder by caculation size of all files in it
-# -h == size in human readable format, M==MB, K==KB
-ln -s /usr/bin/python3 /usr/bin/python  # create symlink/soft-link to access "python3" as "python"
-rm file_name         # delete file
-rm -rf folder_name    # delete folder
-
 
 #-------------------------------- env ---------------------------------------
 # To set environment variable, append env with it's value in ~/.bashrc file
