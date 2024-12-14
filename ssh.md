@@ -68,3 +68,14 @@ ssh-add ~/.ssh/workspace   # add keys to ssh agen
 # 6. connect to your server
 ssh company
 ```
+
+
+### move files
+```bash
+# move file from vps to local
+# here relative == path in vps at `echo $HOME`
+scp <ssh-host>:<relative-path-to-file> ./
+
+# move file from local to vps
+scp ./image1.jpg  <ssh-host>:<relative-directory>
+```
