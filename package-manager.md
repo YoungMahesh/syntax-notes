@@ -45,7 +45,7 @@ sudo apt install snapd  # already installed on ubuntu-based systems
 which <packageName>          # get path of file from which python3 command is executing
 whereis <packageName>        # get all paths where command is available
 
-sudo apt install --only upgrade <packageName>
+sudo apt install --only-upgrade <packageName>
 
 sudo apt purge code   # remove vscode
 sudo apt autoremove  # after every removal
