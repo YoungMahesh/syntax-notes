@@ -122,3 +122,8 @@
   2. Key-Value-based: each deployed container updates a key-value store with relevant information
   3. Annotation-based: a separate object, with annotations, defines the characteristics of the container
   4. File-based: uses files to define configuration
+
+# Errors
+### Certificate Renewal for domain which no longer exists
+- delete domain-entry associated with removed domain  from acme.json (domain-certificate file) file  
+  - e.g. if `xyz.com | abc.com` were defined previously in docker-compose file, abc.com is removed but xyz.com is still in acme.json, then remove xyz.com from json file

@@ -3,6 +3,7 @@
 -------------------------- table1 ------------------------------------
 create table info1(
   id int auto_increment primary key,
+  userId int unsigned,
   name varchar(30) not null,
   amount decimal(14,4) not null,
   completed bool not null default false,
