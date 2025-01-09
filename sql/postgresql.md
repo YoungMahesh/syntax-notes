@@ -11,6 +11,9 @@ docker exec -it postgres bash  # go inside postgresql container, 'postgres' is c
 docker cp postgres:/backups/backup-name.dump .  # copy dump-file from container to outside container
 docker cp ./backups postgres:/backups/   # copy data from outside container to inside containe
 
+# -------------------- install vector extension (for ai) -------------
+docker exec -it <postgres-container-name> sh -c apk add --no-cache postgresql-contrib-vector
+
 #--------------------- inside postgres-docker-container ----------------------------------------
 # backup and restore postgresql
 # https://www.postgresql.org/docs/15/app-pgdump.html

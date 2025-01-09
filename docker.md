@@ -18,6 +18,8 @@ docker image rm <image-id>
 
 ### container management
 ## create container
+docker inspect <container-id>
+docker inspect <container-id> | grep project.working  # get docker-compose file which started the container
 docker container run -d -p 4306:3306 --name db -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
 # here `mysql` is name of image, `db` will be the name of newly-created container
 # -e  == --env, -d == --detach (run container in background)

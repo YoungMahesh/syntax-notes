@@ -7,7 +7,9 @@
 # check version
 lsb_release -a
 
-sudo apt update && sudo apt upgrade
+sudo apt update && apt list --upgradable
+sudo apt install --only-upgrade package_name
+sudo apt upgrade # upgrade all
 ```
 
 ### ui modifications
