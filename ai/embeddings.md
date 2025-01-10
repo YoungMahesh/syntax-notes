@@ -115,6 +115,38 @@ return response.data[0].embedding;
 
 ## store embedding
 
+### using postgres with pgvector extension
+
+```yml
+version: '3.9'
+
+services:
+  # use hostname(service-name)=pgvector in pgadmin connection form
+  pgvector:
+    image: pgvector/pgvector:pg16
+    restart: always
+    # shared memory size; size of RAM allowed to use by docker-container
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: d04c97ee3a8fe3520a82
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data1:/var/lib/postgresql/data
+```
+
+```sql
+-- check if vector extension is enabed
+SELECT EXISTS(SELECT 1 FROM pg_extension WHERE extname = 'vector');
+
+-- enable vector extension
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- list all extensions
+SELECT extname FROM pg_extension;
+```
+
 ### using astra-db
 
 ```typescript
