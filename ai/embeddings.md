@@ -100,6 +100,20 @@ const chunks = await splitter.splitText(savedContent);
 
 ### using openAI
 
+- [embedding modes by openAI](https://platform.openai.com/docs/guides/embeddings#embedding-models)
+
+| Model                  | Default Dimensions | Supported Dimensions | Max Tokens | lauched on    |
+| ---------------------- | ------------------ | -------------------- | ---------- | ------------- |
+| text-embedding-3-large | 3072               | 256, 1024, 3072      | 8191       | december 2022 |
+| text-embedding-3-small | 1536               | 512, 1536            | 8191       | january 2024  |
+| text-embedding-ada-002 | 1536               | 1536                 | 8191       | january 2024  |
+
+- 1 Token ~= 4 characters in English text
+- `text-embedding-3-small`
+  - OpenAI's most cost-effective embedding model
+  - shows improved accuracy compared to `text-embedding-ada-002`
+  - 5 times cheaper than `text-embedding-ada-002`
+
 ```typescript
 import OpenAI from "openai";
 const openai = new OpenAI({ apiKey });
@@ -118,10 +132,10 @@ return response.data[0].embedding;
 ### using postgres with pgvector extension
 
 ```yml
-version: '3.9'
+# DATABASE_URL=postgresql://postgres:d04c97ee3a8fe3520a82@localhost:5432/<db-name>
+version: "3.9"
 
 services:
-  # use hostname(service-name)=pgvector in pgadmin connection form
   pgvector:
     image: pgvector/pgvector:pg16
     restart: always
@@ -131,18 +145,29 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: d04c97ee3a8fe3520a82
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - ./data1:/var/lib/postgresql/data
 ```
 
 ```sql
--- check if vector extension is enabed
-SELECT EXISTS(SELECT 1 FROM pg_extension WHERE extname = 'vector');
+------------- initiate database ----------------
+-- 1. create database
 
--- enable vector extension
+-- 2. enable vector extension
 CREATE EXTENSION IF NOT EXISTS vector;
 
+-- 3. create table to store embeddings
+CREATE TABLE resources (
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    embedding vector(1536) NOT NULL
+);
+CREATE INDEX resourcesEmbeddingIndex ON resources USING hnsw (embedding vector_cosine_ops);
+
+------------- extra -----------------------
+-- check if vector extension is enabed
+SELECT EXISTS(SELECT 1 FROM pg_extension WHERE extname = 'vector');
 -- list all extensions
 SELECT extname FROM pg_extension;
 ```
