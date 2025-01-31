@@ -175,16 +175,24 @@ LIMIT 10;
 
 ### import csv to mysql container
 
+- if file is big, convert it to sql by importing into local database and then import sql file later in remote database
+
 ```bash
+# create a new table xyz with same table schema of existing table abc
+create table <new-table-name> like <existing-table-name>;
+
+# verify - column-count in csv file must be same as column-count / schema in mysql
+describe <table_name>;
+
 # only specific paths in container are accessible to mysql cmd, one of them is `/var/lib/mysql-files`, hence we will copy our file in this location
 docker cp ./p1.csv <container-name>:/var/lib/mysql-files
 
 # go to mysql command-line in container
 docker exec -it <container-name> mysql -u root -p
 
-USE <database-name>;
+use <database-name>;
 
-# verify - column-count in csv file must be same as column-count in mysql
+# ----------- import csv --------------
 # headers of csv, are column names in table
 # ignore first row if it has headers
 LOAD DATA INFILE '/var/lib/mysql-files/p1.csv'
@@ -193,4 +201,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
+
+# ----------- import sql ------------
+source /var/lib/mysql-files/p3.sql;
 ```
