@@ -1,7 +1,7 @@
 # my ubuntu 24.04 setup
 
 
-### install apps
+### install #apps
 
 ```bash
 # check version
