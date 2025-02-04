@@ -129,11 +129,10 @@ return response.data[0].embedding;
 
 ## store embedding
 
-### using postgres with pgvector extension
+### using postgres with #pgvector extension
 
 ```yml
 # DATABASE_URL=postgresql://postgres:d04c97ee3a8fe3520a82@localhost:5432/<db-name>
-version: "3.9"
 
 services:
   pgvector:
