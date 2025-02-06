@@ -43,10 +43,7 @@ services:
       # `docker logs traefik` to view logs, or you can define file which will store logs
 
     # --------------- dynamic configuration -------------------
-    # set domain for this container 
     labels: 
-      - "traefik.http.routers.trfk.entrypoints=websecure"
-      # connect to certification provider from static configuration
       - "traefik.http.routers.trfk.tls.certresolver=cert0"
       - "traefik.http.routers.trfk.rule=Host(`trfk.xyz.com`)"
       - "traefik.http.services.trfk.loadbalancer.server.port=8080"
