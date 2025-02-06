@@ -49,6 +49,7 @@ docker volume rm my-vol
 
 ### docker compose
 docker compose up -d  # start containers mentioned in docker-compose.yml
+docker compose logs 
 docker compose -f ./main.yml up -d  # start containers mentioned given <any>.yml file
 docker compose down # stop containers started through `up`
 docker compose pause

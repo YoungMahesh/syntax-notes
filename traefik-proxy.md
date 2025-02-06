@@ -1,129 +1,108 @@
-## Assign domains
+- example file: ./traefik.docker-compose.yml
 
+# Errors
 
+### Certificate Renewal for domain which no longer exists
 
-### Assigning a Domain to a Container
+- delete domain-entry associated with removed domain from acme.json (domain-certificate file) file
+  - e.g. if `xyz.com | abc.com` were defined previously in docker-compose file, abc.com is removed but xyz.com is still in acme.json, then remove xyz.com from json file
 
-- [Reference](https://doc.traefik.io/traefik/user-guides/docker-compose/basic-example/)
-
-1. Visit the subdomain or domain you want to assign to the container and make sure it is not currently in use, e.g. `whoami.example.com` (`whoami.<domain-name>`)
-
-1. Create a directory (e.g. `traefik`) and create `docker-compose.yml` with following code in inside it
-
-   ```yml
-   version: "3.3"
-
-   services:
-     traefik:
-       image: "traefik:v2.10"
-       container_name: "traefik"
-       command:
-         #- "--log.level=DEBUG"
-         - "--api.insecure=true"
-         - "--providers.docker=true"
-         - "--providers.docker.exposedbydefault=false"
-         - "--entrypoints.web.address=:80"
-       ports:
-         - "80:80"
-         - "8080:8080"
-       volumes:
-         - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-     whoami:
-       image: "traefik/whoami"
-       container_name: "simple-service"
-       labels:
-         - "traefik.enable=true"
-         - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-         # multiple domain support
-         - "traefik.http.routers.whoami.rule=Host(`whoami.com`) || Host(`whoami2.com`) || Host(`www.whoami.com`)"
-         - "traefik.http.routers.whoami.entrypoints=web"
-   ```
-
-1. replace `whoami.localhost` with your domain you want to assign to container, e.g. `whoami.example.com`
-1. run `docker compose up -d`
-1. now visit again to the domain (`whoami.example.com`), and you will see domain is now working
-
-### Assigning HTTPS to a Domain
-
-- [Reference](https://doc.traefik.io/traefik/user-guides/docker-compose/acme-tls/#docker-compose-with-lets-encrypt-tls-challenge)
-
-1. Create a directory (e.g. `traefik`) and create `docker-compose.yml` with following code in inside it
-
-   ```yml
-   version: "3.3"
-
-   services:
-     traefik:
-       image: "traefik:v2.10"
-       container_name: "traefik"
-       command:
-         #- "--log.level=DEBUG"
-         - "--api.insecure=true"
-         - "--providers.docker=true"
-         - "--providers.docker.exposedbydefault=false"
-         - "--entrypoints.websecure.address=:443"
-         - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-         #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-         - "--certificatesresolvers.myresolver.acme.email=postmaster@example.com"
-         - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-       ports:
-         - "443:443"
-         - "8080:8080"
-       volumes:
-         - "./letsencrypt:/letsencrypt"
-         - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-     whoami:
-       image: "traefik/whoami"
-       container_name: "simple-service"
-       labels:
-         - "traefik.enable=true"
-         - "traefik.http.routers.whoami.rule=Host(`whoami.example.com`)"
-         - "traefik.http.routers.whoami.entrypoints=websecure"
-         - "traefik.http.routers.whoami.tls.certresolver=myresolver"
-   ```
-
-1. Execute `docker compose down` if traefik service is running already, and then `docker compose up -d`
-1. you can now visit your domain at `https://<domain-name>`, e.g. `https://whoami.example.com`
-1. The only thing we need to update for future containers is `label` property with 4 labels
-   1. `traefik.enable=true`
-   1. `traefik.http.routers.whoami.rule=Host(`whoami.example.com`)`
-   1. `traefik.http.routers.whoami.entrypoints=websecure`
-   1. `traefik.http.routers.whoami.tls.certresolver=myresolver`
-1. The only things to change to assign domain for another container is:
-   1. name `whoami` in `routers.whoami`, as every router will have different name (you can choose whatever name you like)
-   1. domain-name inside `Host(`whoami.example.com`)`
-
-### Assigning HTTPS to a Domain to already running container
-
-1. create `labels` file with labels list in it
-   ```
-   test.enable=true
-   test.http.routers.whoami.entrypoints=websecure
-   test.http.routers.whoami.rule=Host(`whoami.work1.in`)
-   test.http.routers.whoami.tls.certresolver=myresolver
-   ```
-1. run `docker run --label-file ./labels <container-name>`
+# Theory
 
 ## [Concepts](https://doc.traefik.io/traefik/getting-started/concepts/)
 
-1. EntryPoints: define the port which will receive the packets, and whether listen to TCP or UDP
-2. Routers: connecting incoming requests to the services that can handle them
-3. Middlewares: attached to the routers, modify the requests or responses before they are sent to services
-4. Services: configuring how to reach the actual services
+- flow of request
 
-### [Providers](https://doc.traefik.io/traefik/providers/overview/)
+  1. EntryPoints: define the port which will receive the packets, and whether listen to TCP or UDP
+  2. Routers: connecting incoming requests to the services that can handle them
+  3. Middlewares: attached to the routers, modify the requests or responses before they are sent to services
+  4. Services: configuring how to reach the actual services
+  5. Server/Application
 
-- Configuration discovery in Traefik is achieved through Providers.
-- The providers are infrastructure components, whether orchestrators, container engines, cloud providers, or key-value stores.
-- Four catcategories of providers:
-  1. Label-based: each deployed container has a set of labels attached to it
-  2. Key-Value-based: each deployed container updates a key-value store with relevant information
-  3. Annotation-based: a separate object, with annotations, defines the characteristics of the container
-  4. File-based: uses files to define configuration
+- Traefik is a edge router: a network device or service which sits at the boundary (or 'edge') between different networks, specifically between
+  internal infrastructure and external networks like the internet
+- have native integration with AWS, Kubernetes, Docker, etc
 
-# Errors
-### Certificate Renewal for domain which no longer exists
-- delete domain-entry associated with removed domain  from acme.json (domain-certificate file) file  
-  - e.g. if `xyz.com | abc.com` were defined previously in docker-compose file, abc.com is removed but xyz.com is still in acme.json, then remove xyz.com from json file
+## how
+
+- traefik have static (startup time) and dynamic (while running) configuration
+
+### static configuration
+
+There are 3 different, mutually exclusive (e.g. you can use only one at a time), ways to define static configuration
+options in traefik:
+
+1. configuration file (yaml or toml)
+
+- when traefik starts, it searches for a file named traefik.toml or traefik.yaml or traefik.yml in `/etc/traefik`
+  directory
+
+2. command-line arguments
+
+- you can define these in docker-compose file
+
+```yml
+services:
+  traefik:
+    command:
+      - "--api.insecure=true"
+      - "--entrypoints.web.address=:81"
+```
+
+3. environment variables
+
+- can be define in docker-compose file
+
+  ```yml
+  services:
+    traefik:
+      environment:
+        - TRAEFIK_API_INSECURE=true
+        - TRAEFIK_PROVIDERS_DOCKER=true
+  ```
+
+### dynamic configuration
+
+- Providers are the configuration sources that dynamically inform traefik about the infrastructure, services, and routing rules
+
+- [Traefik providers](https://doc.traefik.io/traefik/providers/overview/)
+
+  - The providers are infrastructure components, whether orchestrators, container engines, cloud providers, or key-value stores.
+  - Four catcategories of providers:
+    1. Label-based: each deployed container has a set of labels attached to it
+    2. Key-Value-based: each deployed container updates a key-value store with relevant information
+    3. Annotation-based: a separate object, with annotations, defines the characteristics of the container
+    4. File-based: uses files to define configuration
+
+## why
+
+- many of reverse proxies but none were dynamic
+- e.g. traefik automatically detect new container, creates appropriate routing rules, domain setup just by looking at labels on container
+- microservices are dynamic in natures (they starts and shut-down very frequently) but much of configuration is static means you need
+  to update your reverse-proxy configuration separately whenever services are started or stopped
+- traefik became dynamic by watching new events of orchestrator (docker, kubernetes, etc)
+
+## Use Cases
+
+- Reverse Proxy: sits in front of web servers and routes incoming requests to the appropriate backend service
+
+  - redirects traffic between different services
+  - handle SSL/TLS termination (process where reverse-proxy or load-balancer handles the encryption and decryption of HTTPS traffic,
+    relieving backend servers from this computational overhead)
+  - provide an additional layer of security by hiding backend server details
+
+- API Gateway: acts as entrypoint for API requests
+
+  - request/response transformation
+  - e.g. query parameter manipulation: `/api/users?filter=active` (original URL) to `/api/users?status=active&version=v2` (transformed URL)
+
+- authentication and authorization
+
+- rate limiting
+
+- Load Balancing: distribute incoming network traffic across multiple servers
+
+  - prevent any single server from becoming a bottleneck
+  - load balancing strategies: Round Robin, Weighted Round Robin, Least Connections, IP Hash
+
+- Certificate Management: automatic SSL/TLS certificate management using Let's Encrypt
