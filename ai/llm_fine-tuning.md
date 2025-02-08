@@ -34,8 +34,8 @@
 - sequential fine-tuning
   - involves adapting a model to a series of related tasks in stages, allowing it to build proficiency across multiple specialized areas
     while retaining broader knowledge
-  - e.g. first fine-tuning a model on general news articles, then sequentially adapting it to focus on political news and later 
-  fine-tuning it further for election-related content
+  - e.g. first fine-tuning a model on general news articles, then sequentially adapting it to focus on political news and later
+    fine-tuning it further for election-related content
 - distillation
   - trains a smaller model to replicate the performance of a larger one, optimizing efficiency and size while maintaining performance levels
     suitatable for deployment in resource-constrained environments
@@ -56,6 +56,8 @@ to lower pricision formats like 8-bit integers
 
 # Practical
 
+## frontier models
+
 ### [OpenAI fine tuning](https://platform.openai.com/docs/guides/fine-tuning)
 
 - [costs](https://platform.openai.com/docs/guides/fine-tuning#estimate-costs)
@@ -65,3 +67,8 @@ to lower pricision formats like 8-bit integers
 - advantages
   - ability to train on more examples that can fit in a prompt
   - token savings due to shorter prompts
+
+## open-source models
+
+### llama
+
