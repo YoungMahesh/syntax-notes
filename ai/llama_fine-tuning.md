@@ -1,3 +1,34 @@
+# example
+```python
+# -q = quiet; minimize console output
+!pip install -q datasets requests torch peft bitsandbytes tranformers trl accelerate sentencepiece
+
+import os
+import re
+import math
+from tqdm import tqdm
+from google.colab import userdata
+from huggingface_hub import login
+import torch
+import transformers
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, set_seed
+from peft import LoraConfig, PeftModel
+from datetime import datetime
+
+# constants
+BASE_MODEL = "meta-llama/Meta-Llama-3.1-8B"
+FINETUNED_MODEL = f"ed-donner/pricer-2024-09-13_13.04.39"
+
+# Hyperparameters for OLoRA Fine-Tuning
+
+# r - the inner dimension of the low-rank matrices
+# started with 8 then double to 16, then good results with 32
+LORA_R = 32
+
+
+LORA_ALPHA = 64
+```
+
 # word meanings
 - parameters
   - broder term that encompasses all learnable values in a neural network, including weights and biases
@@ -93,6 +124,7 @@ learning engineer to guide the training process
   - 3 essential: rank, alpha, target modules
   - rank (r)
     - the inner dimension of the low-rank matrices
+    - low-rank matrices: 
     - typical range: 4-16
     - impact: lower rank (4-8): less computational cost; higher-rank(32-64): more capacity to capture task-specific nuances
     - rule of thumb: start with 8 then double to 16, then 32, until diminishing returns
