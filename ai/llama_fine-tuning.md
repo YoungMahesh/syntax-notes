@@ -1,7 +1,10 @@
-# example
+# examples
+
+### example 1
 ```python
 # -q = quiet; minimize console output
-!pip install -q datasets requests torch peft bitsandbytes tranformers trl accelerate sentencepiece
+# --use-deprecated=legacy-resolver - to fix error related to dependency conflicts
+!pip install -q fs datasets requests torch peft bitsandbytes transformers trl accelerate sentencepiece --use-deprecated=legacy-resolver
 
 import os
 import re
@@ -20,13 +23,153 @@ BASE_MODEL = "meta-llama/Meta-Llama-3.1-8B"
 FINETUNED_MODEL = f"ed-donner/pricer-2024-09-13_13.04.39"
 
 # Hyperparameters for OLoRA Fine-Tuning
-
 # r - the inner dimension of the low-rank matrices
 # started with 8 then double to 16, then good results with 32
 LORA_R = 32
-
-
 LORA_ALPHA = 64
+TARGET_MODULES = ['q_proj', 'v_proj', 'k_proj', 'o_proj']
+
+# login to huggingface by importing it's api key
+hf_token = userdata.get('HF_TOKEN')
+login(hf_token, add_to_git_credential=True)
+
+
+# use base model without quantization
+# device_map = "auto" means that the model will be loaded on the GPU if it is available
+# will get warning that GPU RAM is not enough on free version of google-colab (where GPU RAM is 15GB)
+# llama model is gated on huggingface; i will try ollama in future 
+base_model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, device_map="auto")
+
+# memory footprint of llama 3.1 8B model is ~ 32.1 GB
+print(f"Memory footprint: {base_model.get_memory_footprint() / 1e9:,.1f} GB")
+
+
+# get details of model architecture - embed tokens, decoder layers, activation function, etc
+base_model
+
+
+# load the base model using 8 bit
+quant_config = BitsAndBytesConfig(load_in_8bit=True)
+base_model = AutoModelForCausalLM.from_pretrained(
+  BASE_MODEL,
+  quantization_config=quant_config,
+  device_map="auto"
+)
+# ~ 9.1 GB
+print(f"Memory footprint: {base_model.get_memory_footprint() / 1e9:,.1f} GB")
+
+
+# get architecture of quantized base model; you will see there is not difference in architecture of the model
+base_model
+
+
+# load the base model using 4 bit
+quant_config = BitsAndBytesConfig(
+  load_in_4bit=True,
+  bnb_4bit_use_double_quant=True,
+  bnb_4bit_compute_dtype=torch.float16,
+  bnb_4bit_quant_type="nf4"
+)
+base_model = AutoModelForCausalLM.from_pretrained(
+  BASE_MODEL,
+  quantization_config=quant_config,
+  device_map="auto"
+)
+# ~ 5.59 GB
+print(f"Memory footprint: {base_model.get_memory_footprint() / 1e9:,.1f} GB")
+base_model
+
+
+# ---------- exploring PEFT (parameter-efficient fine-tuning) models -------------------------
+# 
+# A PEFT model is an approach to fine-tuning LLM which only fine-tunes a small number of additional
+#   parameters while keeping the original pre-trained model's parameters frozen
+# Main PEFT methods: LoRA (Low-Rank Adaptation), Prefix Tuning, Prompt Tuning, P-Tuning
+# load a base model and then apply a PEFT approach to adapt it to a specific task without changing
+#   the entire model's parameters
+fine_tuned_model = PeftModel.from_pretrained(base_model,FINETUNED_MODEL)
+# ~ 5.70 GB; a very small increase in memory footprint compared to base model
+print(f"Memory footprint: {fine_tuned_model.get_memory_footprint() / 1e9:,.1f} GB")
+
+# view architecture of fine-tuned model; architecture is now different from base model
+# in architecture,you will see additional layers (lora_A, lora_B, etc) in additional to 
+#   existing layers (base_layer) for decoder layers (q_proj, k_proj, etc) of the model
+fine_tuned_model
+
+
+# each of the target modules has 2 LoRA adapter matrices, called lora_A and lora_B
+# these are designed to that weights can be adapted by adding alpha * lora_A * lora_B
+# let's calculate the number of weights using their dimensions: 
+
+# see the matrix dimensions in the architecture details
+lora_q_proj = 4096 * 32 + 4096 * 32
+lora_k_proj = 4096 * 32 + 1024 * 32
+lora_v_proj = 4096 * 32 + 1024 * 32
+lora_o_proj = 4096 * 32 + 4096 * 32
+
+# each layer comes to
+lora_layer = lora_q_proj + lora_k_proj + lora_v_proj + lora_o_proj
+
+# there are 32 layers
+params = lora_layer * 32
+
+# so the total size in MB is
+size = (params * 4) / 1_000_000
+
+# ~  size: 109 MB; you can see this size in huggingface repository of fine-tuned model for file
+#   named adapter_model.safetensors (this file store parameters)
+print(f"Number of parameters: {params:,}; size: {size:,.1f} MB")
+
+# ---------- summary of what we have done so far -------------------------
+# 1. we take original base model of size 32 GB
+# 2. we quantized it to 8 bit reducing it's size to ~ 9 GB
+# 3. we quantized it to 4 bit reducing it's size to ~ 5.6 GB
+# 4. we then apply QLoRA (with r=32) on quantized(4-bit) model increasing size by small amount
+#    while making it more efficient to a specific task
+```
+
+## considerations before selecting our base model
+- number of parameters
+- Llama vs Qwen vs Phi vs Gemma
+- base or instruct variants
+
+### where to look for base model
+On [huggingface open llm leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard), use filters according to our needs
+
+
+### example 2
+```python
+# keep in mind: our base model has 8 billion parameters, quantized down to 4 bits compared with gpt-40
+#   at TRILLIONS of parameters
+
+!pip install -q datasets==2.21.0 requests torch peft bitsandbytes transformers==4.43.1 trl accelerate sentencepiece tiktoken matplotlib
+
+import os
+import re
+import math
+from tqdm import tqdm
+from google.colab import userdata
+from huggingface_hub import login
+import torch
+import transformers
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, set_seed
+from peft import LoraConfig, PeftModel
+from datetime import datetime
+from matplotlib.pyplot as plt
+
+# Tokenizers
+LLAMA_3_1 = "meta_llama/Meta-Llama-3.1-8B"
+QWEN_2_5 = "Qwen/Qwen2.5-7B"
+GEMMA_2 = "google/gemma-2-9b"
+PHI_3 = "microsoft/Phi-3-medium-4k-instruct"
+
+# constants
+BASE_MODEL = LLAMA_3_1
+HF_USER = 'ed-donner'
+DATASET_NAME = f"{HF_USER}/pricer-data"
+MAX_SEQUENCE_LENGTH = 182
+QUANT_4_BIT = True
+
 ```
 
 # word meanings
@@ -124,7 +267,6 @@ learning engineer to guide the training process
   - 3 essential: rank, alpha, target modules
   - rank (r)
     - the inner dimension of the low-rank matrices
-    - low-rank matrices: 
     - typical range: 4-16
     - impact: lower rank (4-8): less computational cost; higher-rank(32-64): more capacity to capture task-specific nuances
     - rule of thumb: start with 8 then double to 16, then 32, until diminishing returns
