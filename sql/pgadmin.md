@@ -1,20 +1,3 @@
-### setup
-
-```yml
-version: "3.9"
-
-services:
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: xyz@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 80e172e352343dsfe1d6
-    ports:
-      - "5050:80"
-```
-
 ### connect
 
 - use hostname(service-name)= (<docker-service-name> when on local) | (<ip-address> when on vps-server) in pgadmin connection form

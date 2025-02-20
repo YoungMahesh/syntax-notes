@@ -1,5 +1,9 @@
 # Practical
 
+## options
+### databases to store embeddings
+- [chroma](https://www.trychroma.com/)
+
 ## scrap data from website to create content
 
 ### using Puppeteer
@@ -214,7 +218,7 @@ These vectors capture the semantic relationships and inherent properties of the 
 - The closer two embeddings are in this vector space, the more semantically similar they are[1]
 
 **Dimensionality Reduction**
-Embeddings convert high-dimensional data into lower-dimensional representations while preserving important relationships and patterns[2]. This reduction makes the data more manageable for machine learning algorithms while retaining crucial semantic information.
+Embeddings convert high-dimensional data into lower-dimensional representations while preserving important relationships and patterns. This reduction makes the data more manageable for machine learning algorithms while retaining crucial semantic information.
 
 ## Creation Process
 
@@ -246,9 +250,4 @@ Embeddings are created through neural networks that learn from data rather than 
 
 Embeddings are becoming increasingly crucial for AI transparency and interpretability. By visualizing embeddings, researchers can better understand how AI models perceive and process different data points, offering insights into the traditionally opaque nature of AI systems[5].
 
-Citations:
-[1] https://www.ibm.com/think/topics/embedding
-[2] https://aws.amazon.com/what-is/embeddings-in-machine-learning/
-[3] https://www.geeksforgeeks.org/what-are-embeddings-in-machine-learning/
-[4] https://labelbox.com/guides/ai-foundations-understanding-embeddings/
-[5] https://www.decube.io/post/embedding-ai-ml-chatgpt
+
