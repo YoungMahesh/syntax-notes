@@ -39,6 +39,41 @@
   S3_BUCKET_NAME="my-bucket"
   ```
 
+### relationship between rootUser, user, accessKeys
+
+- user (normal user or rootUser) can create accessKeys
+- accessKeys only have programaticAccess
+- user credentials can be used as accessKey(username) and secretKey(password)
+- user credentials can be used for console-access(login to ui), api-access and programmaticAccess 
+
+```mermaid
+classDiagram
+    RootUser --|> User
+    User --|> AccessKeys
+    class RootUser {
+        +createPolicies()
+        +assignPoliciesToUser()
+        +consoleAccess
+        +APIAccess
+        +programmaticAccess
+        +createUsers()
+        +createAccessKeys()
+    }
+    class User {
+        +inheritPoliciesFromParent()
+        +assignPoliciesToAccessKeys()
+        +consoleAccess
+        +APIAccess
+        +programmaticAccess
+        +createAccessKeys()
+    }
+    class AccessKeys {
+        +inheritPoliciesFromParent()
+        +programmaticAccess
+    }
+```
+
+### cli usage
 - create bucket
   - download and install [minio command line - mc](https://dl.min.io/client/mc/release/linux-amd64/)
 
@@ -59,7 +94,7 @@
   mc admin policy list minio-admin
   # read specific policy
   mc admin policy info minio-admin readonly
-  # attach policy to user
+  # attach policy to user; here are giving readwrite access to user1 for 'all buckets'
   mc admin policy attach minio-admin readwrite --user user1
   mc admin policy entities minio-admin --user user1
   # create user connection

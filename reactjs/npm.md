@@ -12,4 +12,7 @@
 ```bash
 npm outdated # check list of packages which can be upgraded
 npm update --save # upgrade node packages
+
+# location of global node_modules
+npm root -g
 ```
