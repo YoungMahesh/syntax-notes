@@ -17,14 +17,24 @@
     - each job is a set of steps than run on a specified runner (e.g. Ubuntu, Windows, etc.)
     - jobs can run in parallel or sequentially
 
+
+## execute action 
+
+- open this repository on github
+- set secrets and variables in  `github-repository -> settings -> security -> secrets and variables -> actions`
+- click on 'Actions' tab, click on 'select workflow'
+- you will see list of available workflows on left-side
+- select the name of workflow you want to execute 
+- click 'Run Workflow', after few seconds delay you will see script execution details
+
+
 # Examples
 
-### action 1
+### action 1 - run python script with secrets
 
 - action is defined in `.github/workflows/script1.yml`, task of which is to execute `script1.py` file in the same directory
 - user can manually execute action through following process
-  - open this repository on github
-  - set .env variable `API_TOKEN_1` at `settings -> security -> secrets and variables -> actions`
-  - click on 'Actions' tab, click on 'select workflow'
-  - select 'Execute Script#1' which is the name of workflow define under `name` variable in `script1.yml` file
-  - click 'Run Workflow', in few seconds you will script execution details
+
+### action 2 - backup mysql database to minio object storage
+
+- action is defined in `.github/workflows/db-backup.yml`
