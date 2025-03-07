@@ -1,9 +1,12 @@
 ## backup
 
 ```bash
+# current state of files in git without history (latest commit files)
 # git archive -o <repo-name>.zip <branch-name>
 git archive -o repository.zip HEAD
 # -o == --output
+
+# use `git bundle` to backing up entire repository with their history intact; but can just clone zip
 ```
 
 ## hooks

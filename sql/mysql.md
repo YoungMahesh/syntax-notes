@@ -38,7 +38,9 @@ select sum(amount) as total_info1_amt from info1;
 
 -------------------------- update rows ------------------------------------
 
+-- you cannot use 'table' during update; e.g. `update table ticket` is invalid
 update ticket set status = 'approved-1' where status = 'verified';
+update ticket set status = 'approved-2'; -- update all rows
 
 ----------------------------- create rows --------------------------------------
 
@@ -62,6 +64,19 @@ delete from info1; -- delete all rows from table info1
 
 delete from info where name is null;
 
+--------------- circular depedency ----------------------
+-- suppose info1 has a foreign key to info2.id
+-- and info2 has a foreign key to info1.id
+-- This creates a circular dependency that prevents you from deleting records from either table directly.
+-- To solve this problem, we need to temporarily disable foreign key checks, delete the data, and then re-enable the checks.
+-- Temporarily disable foreign key checks
+set foreign_key_checks=0;
+-- Delete data from both tables
+delete from info1;
+delete from info2;
+-- Re-enable foreign key checks
+set foreign_key_checks=1;
+
 -------------------------- column --------------------------
 
 alter table info1
@@ -84,23 +99,24 @@ drop column name;
 
 -- single column
 alter table info1
-add constraint unique_info1_name UNIQUE (name);
+add constraint unique_info1_name unique (name);
 
 -- combination of columns
 ALTER TABLE your_table_name
-add constraint unique_combination UNIQUE (column1, column2);
+add constraint unique_combination unique (column1, column2);
 
 create table info2(
    info1_id int not null
 );
 
 -- suppose each row in info2 references to multiple rows in info1
-CREATE TABLE joint_table (
+create table joint_table (
     info2_id INT,
     info1_id INT,
-    FOREIGN KEY (info2_id) REFERENCES info2(id),
-    FOREIGN KEY (info1_id) REFERENCES info1(id),
-    PRIMARY KEY (info2_id, info1_id)
+    foreign key (info2_id) references info2(id),
+    foreign key (info1_id) references info1(id),
+    --primary key (info2_id, info1_id),
+    unique (service_request_id, withdrawal_id)
 );
 
 alter table info2
