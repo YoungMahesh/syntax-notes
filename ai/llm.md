@@ -5,12 +5,15 @@ They are built on deep learning techniques, specifically using a type of neural 
 The term 'Large' refers to the extensive datasets on which these models are trained
 
 ### techniques to optimize the performance of the model
-- prompting: multi-shot, chaining and tools
-  - fast to implement, low cost
+- prompting: multi-shot; chaining and tools
+  - fast to implement; low cost
+  - limited by context length; slower, expensive inference
 - RAG
   - accuracy improvement with low data needs, scalable, efficient
+  - harder than prompt, lack nuance
 - fine-tuning
   - deep expertise & specialist knowledge, nuance, learn a different tone/style, faster and cheaper inference
+  - need significant effort and resources to implement; high data needs; risk of 'catastrophic forgetting'
 
 ### inference
 

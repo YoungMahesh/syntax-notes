@@ -1,6 +1,11 @@
-# examples
+## examples
 
-### example 1
+### example 1 - use QLoRA fine-tuning
+
+- here we will reduce size of the original model through qunatization, then apply parameters from another models to make it more
+  efficient for a specific task
+- so the model in the end will be less in size but more efficient at specific task than original model
+
 ```python
 # -q = quiet; minimize console output
 # --use-deprecated=legacy-resolver - to fix error related to dependency conflicts
@@ -22,7 +27,7 @@ from datetime import datetime
 BASE_MODEL = "meta-llama/Meta-Llama-3.1-8B"
 FINETUNED_MODEL = f"ed-donner/pricer-2024-09-13_13.04.39"
 
-# Hyperparameters for OLoRA Fine-Tuning
+# Hyperparameters for LoRA Fine-Tuning
 # r - the inner dimension of the low-rank matrices
 # started with 8 then double to 16, then good results with 32
 LORA_R = 32
@@ -37,7 +42,7 @@ login(hf_token, add_to_git_credential=True)
 # use base model without quantization
 # device_map = "auto" means that the model will be loaded on the GPU if it is available
 # will get warning that GPU RAM is not enough on free version of google-colab (where GPU RAM is 15GB)
-# llama model is gated on huggingface; i will try ollama in future 
+# llama model is gated on huggingface; i will try ollama in future
 base_model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, device_map="auto")
 
 # memory footprint of llama 3.1 8B model is ~ 32.1 GB
@@ -58,10 +63,8 @@ base_model = AutoModelForCausalLM.from_pretrained(
 # ~ 9.1 GB
 print(f"Memory footprint: {base_model.get_memory_footprint() / 1e9:,.1f} GB")
 
-
 # get architecture of quantized base model; you will see there is not difference in architecture of the model
 base_model
-
 
 # load the base model using 4 bit
 quant_config = BitsAndBytesConfig(
@@ -81,7 +84,7 @@ base_model
 
 
 # ---------- exploring PEFT (parameter-efficient fine-tuning) models -------------------------
-# 
+#
 # A PEFT model is an approach to fine-tuning LLM which only fine-tunes a small number of additional
 #   parameters while keeping the original pre-trained model's parameters frozen
 # Main PEFT methods: LoRA (Low-Rank Adaptation), Prefix Tuning, Prompt Tuning, P-Tuning
@@ -92,14 +95,14 @@ fine_tuned_model = PeftModel.from_pretrained(base_model,FINETUNED_MODEL)
 print(f"Memory footprint: {fine_tuned_model.get_memory_footprint() / 1e9:,.1f} GB")
 
 # view architecture of fine-tuned model; architecture is now different from base model
-# in architecture,you will see additional layers (lora_A, lora_B, etc) in additional to 
+# in architecture,you will see additional layers (lora_A, lora_B, etc) in additional to
 #   existing layers (base_layer) for decoder layers (q_proj, k_proj, etc) of the model
 fine_tuned_model
 
 
 # each of the target modules has 2 LoRA adapter matrices, called lora_A and lora_B
 # these are designed to that weights can be adapted by adding alpha * lora_A * lora_B
-# let's calculate the number of weights using their dimensions: 
+# let's calculate the number of weights using their dimensions:
 
 # see the matrix dimensions in the architecture details
 lora_q_proj = 4096 * 32 + 4096 * 32
@@ -129,18 +132,19 @@ print(f"Number of parameters: {params:,}; size: {size:,.1f} MB")
 ```
 
 ## considerations before selecting our base model
+
 - number of parameters
 - Llama vs Qwen vs Phi vs Gemma
 - base or instruct variants
 
 ### where to look for base model
+
 On [huggingface open llm leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard), use filters according to our needs
 
-
 ### example 2
+
 ```python
-# keep in mind: our base model has 8 billion parameters, quantized down to 4 bits compared with gpt-40
-#   at TRILLIONS of parameters
+# keep in mind: our base model has 8 billion parameters, quantized down to 4 bits compared with gpt-40 which has TRILLIONS of parameters
 
 !pip install -q datasets==2.21.0 requests torch peft bitsandbytes transformers==4.43.1 trl accelerate sentencepiece tiktoken matplotlib
 
@@ -170,9 +174,12 @@ DATASET_NAME = f"{HF_USER}/pricer-data"
 MAX_SEQUENCE_LENGTH = 182
 QUANT_4_BIT = True
 
+# work in progress
+
 ```
 
-# word meanings
+## word meanings
+
 - parameters
   - broder term that encompasses all learnable values in a neural network, including weights and biases
   - think of parameters as the entire collection of values that define the network's configuration
@@ -181,38 +188,40 @@ QUANT_4_BIT = True
   - represent the strength of connections between neurons in different layers
   - determine how much influence one neuron has on another
   - typically organized in matrices
-  - updated during training to minimize the loss function 
+  - updated during training to minimize the loss function
   - in technique like LoRA, you're specifically manipulating weights while keeping other parameters frozen
 - weight and parameters in Llama 3.1 8B model
   - 8B == 8 billion parameters
   - majority of the 8 billion parameters are weight parameters
     - weights include: attention weights, projection matrices, embedding weights
-    - not all 8 billion parameters are equally important, LoRA allows fine-tuning by manipulating a small subset of weights 
+    - not all 8 billion parameters are equally important, LoRA allows fine-tuning by manipulating a small subset of weights
     - typically, you might only train 1-10% of the total parameters during fine-tuning
 
-# LoRA (Low-Rank Adaptation)
-- a popular technique for efficiently adapting large language models (LLMs) 
-- it is an innovative parameter-efficient fine-tuning method designed to reduce the computational and memory costs of adapting 
-large neural networks
+## LoRA (Low-Rank Adaptation)
+
+- a popular technique for efficiently adapting large language models (LLMs)
+- it is an innovative parameter-efficient fine-tuning method designed to reduce the computational and memory costs of adapting
+  large neural networks
 - problem it solves
-  - traditional fine-tuning requires updating all parameters of a large model, which is computationally expensive and memory intensive. 
-  For massive models like GPT-3, LLaMA with billions of parameters, full fine-tuning is often impractical
+  - traditional fine-tuning requires updating all parameters of a large model, which is computationally expensive and memory intensive.
+    For massive models like GPT-3, LLaMA with billions of parameters, full fine-tuning is often impractical
 - core principle
   - instead of updating all model weights, LoRA introduces small, trainable "rank decomposition" matrices. These matrices are added to
-  the original pre-trained model weights during fine-tuning.
+    the original pre-trained model weights during fine-tuning.
 - how it works
   - for a weight matrix W, LoRA introduces two smaller matrices: A (low-rank) and B.
   - the update to the original weights becomes: W' = W + BA
   - A and B are much smaller than W, significantly reducing trainable parameters
 - limitations
-  - performance can be slightly lower than full fine-tuning 
-  - requires careful selection of rank and adaptation strategy 
+  - performance can be slightly lower than full fine-tuning
+  - requires careful selection of rank and adaptation strategy
 - best practices
   - start with a low rank (4-16) and increase if needed
   - experiment with different adaptation techniques
   - monitor performance metrics during fine-tuning
 
 ## QLoRA - Quantization Low-Rank Adaptation
+
 - combines two powerful techniques: Quantization and Low-Rank Adaptation (LoRA)
 - designed to enable fine-tuning of large language models with even more limited computational resources
 - keep the number of weights but reduce their precision
@@ -238,9 +247,10 @@ large neural networks
   - experiment with different low-rank matrix sizes
 
 ## Hyperparameters
+
 - configuration settings that are set before the learning process begins and control how a machine learning model is trained
 - unlike model parameters (like weights and biases), that are learning during training, hyperparameters are set by the machine
-learning engineer to guide the training process
+  learning engineer to guide the training process
 - characteristics
   - set before training begins
   - cannot be directly learned from the data
@@ -259,7 +269,7 @@ learning engineer to guide the training process
   - number of epochs
     - how many times the entiner training dataset is passed through the model
     - too few: underfitting; too many: overfitting
-  - network architecture 
+  - network architecture
     - number of layers, number of neurons per layer, activation functions, dropout rates
   - regularization
     - L1/L2 regularization strength, dropout rate, early stopping patience
@@ -308,16 +318,14 @@ learning engineer to guide the training process
   ```
 
 ## Llama fine-tuning with LoRA
+
 - Llama 3.1 8B architecture consists of 32 groups of modules stacked on top of each other, called 'Llama Decoder Layers'
 - Each has self-attention layers, multi-layer perception layers, SiLU activation and layer norm
 - These parameters take up 32GB memory (3.1 8B model takes up 32GB, 8B refers to 8-billion parameters), training of it will take way more
-than 32GB memory
+  than 32GB memory
 - But with LoRA, we can do fine-tuning with limited resources with following steps
   1. freeze the weights, we will not optimize them
   2. select some layers to target, called 'Target Modules'
   3. create new 'adapter' metrices with lower dimensions, fewer parameters
   4. apply these adapters to the Target Modules to adjust them - and these get trained
-    - to be more precise, there are infact two LoRA metrices A and B that get applied
-
-
-
+  - to be more precise, there are infact two LoRA metrices A and B that get applied

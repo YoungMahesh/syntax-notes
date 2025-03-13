@@ -1,11 +1,20 @@
-### handle datasets
+## why datasets
+
+- datasets prvoides data for model training
+- many times you need to filter out data from the original data to increase precision of the model
+
+## handle datasets
 
 - [get datasets](/bookmarks.md#datasets)
 - investigate -> parse -> visualize -> assess data quality -> curate(modify) -> save
 
-### google colab notebook
+## examples google colab notebook
 
 - use dataset - [amazon reviews 2023 - appliances](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023/blob/main/raw/meta_categories/meta_Appliances.jsonl)
+
+### [example1](https://github.com/ed-donner/llm_engineering/blob/main/week6/day1.ipynb)
+
+- get dataset, filter out data which comes in exceptional category
 
 ```ipynb
 !pip install dotenv huggingface_hub datasets matplotlib
@@ -17,6 +26,7 @@ from dotenv import load_dotenv
 from huggingface_hub import login
 from datasets import load_dataset, Dataset, DatasetDict
 
+# we are going to import custom 'items.py' file which will filter out data such that it will increase the precision of the model
 # python will first look for local directory for package, hence it will pick up ./items.py file instead of going to package-manager
 # 1. mount google-drive
 from google.colab import drive
@@ -131,7 +141,7 @@ plt.xlabel('Length (chars)')
 # Set the label for the y-axis, which represents the count of occurrences.
 plt.ylabel('Count')
 
-# Create a histogram of the lengths. 
+# Create a histogram of the lengths.
 # The rwidth parameter sets the relative width of the bars (0.7 means bars will be 70% of the bin width).
 # The color parameter sets the color of the bars to light blue.
 # The bins parameter specifies the range and step size for the histogram bins (from 0 to 6000 with a step of 100).
@@ -151,6 +161,19 @@ plt.ylabel('Count')
 plt.hist(prices, rwidth=0.7, color="orange", bins=range(0, 1000, 10))
 plt.show()
 ```
+
+#### Now it's time to curate our dataset
+
+- we will create item instances, which truncate the text to fit within 180 tokens using the right Tokenizer and will create a prompt
+to be used during training
+- items will be rejected if they don't have sufficient characters
+
+- why 180 token?
+  - this is an example of 'hyper-paramter'. In other words, it's basically trial and error! We want a sufficiently large number of tokens
+  so that we have enough useful information to gauge the price. But we also want to keep the number low so that we can train efficiently.
+
+- if we decided on 180 tokens, why [items.py](./items.py) constrains inputs to 160 token?
+  - The description of products is limited to 160 tokens because we add some more text before and after the description to turn sxsx
 
 ```ipynb
 

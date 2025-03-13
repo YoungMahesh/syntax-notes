@@ -30,7 +30,7 @@
 - parameter-efficient fine-tuning (PEFT)
   - updates only a small subset of parameters during training, significantly reducing memory and computational requirements compared to
     full fine-tuning methods
-  - techiques such as Low-Rank Adaptation (LoRA) exemplify this approach
+  - techiques such as [Low-Rank Adaptation (LoRA)](/ai/llama_fine-tuning.md) exemplify this approach
 - sequential fine-tuning
   - involves adapting a model to a series of related tasks in stages, allowing it to build proficiency across multiple specialized areas
     while retaining broader knowledge
@@ -70,5 +70,5 @@ to lower pricision formats like 8-bit integers
 
 ## open-source models
 
-### llama
+[Llama Fine Tuning](/ai/llama_fine-tuning.md)
 
