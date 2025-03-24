@@ -17,6 +17,11 @@ rclone cat drive1:names.txt # print file-content on terminal
 
 rclone copy --progress ./cat.jpg drive1:pics  # copy local data to remote account, skip unchanged items
 
+# https://rclone.org/filtering/#files-from-read-list-of-source-file-names
+# copy files from list to target; each file-name on new line; trims whitespace around file-name; comments start with #
+rclone copy --files-from <list-of-files> <path-where-files-in-list-are-stored> <target-path  
+rclone copy --files-from list.txt ./dir1 drive1:dir1 
+
 rclone move -v --drive-server-side-across-configs drive1:Hosted/Books drive2:books
 # move files server side
 # transfer files without using local-bandwidth, used with "copy", "move", and "sync"
@@ -37,7 +42,7 @@ rclone sync -i --progress /home/youngmahesh/downloads/docs drive1:docs --transfe
 # Destination is updated to match source, including deleting files if necessary
 # "-i" flgs prompts you for permission before deleting anything,
 # "--progress" shows the transferring files and transfer speed
-# "--transfers=1000" transfer 1000 files at a time
+# "--transfers=1000" transfer 1000 files at a time; --transfers=1 shown quick file transfer for pen-drives
 
 rclone purge --progress drive1:another   # delete file, folder and content inside it
 # file deletions by "sync" and "purge" are preserved in "trash" of the cloud storage

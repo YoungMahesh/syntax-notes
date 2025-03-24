@@ -13,22 +13,6 @@ task status:completed delete  # delete all completed tasks
 task purge  # remove all deleted tasks permanently
 ```
 
-### timewarrior
-
-- [watson](./watson.md) is far more convenient to use than timewarrior if you care about how much time you spent throughout the day
-- https://timewarrior.net/
-
-```bash
-sudo apt install timewarrior
-
-# connect with taskwarrior
-# 1. download: https://github.com/GothenburgBitFactory/timewarrior/blob/develop/ext/on-modify.timewarrior
-# 2. copy file to `~/.task/hooks/`
-# 3. chmod +x ~/.task/hooks/on-modify.timewarrior
-task diagnostics # verify activation under hooks-section
-
-timew summary '<task-description' # get total time of task will be tracked on `task start <id>` and `task stop <id>`
-```
 
 ### backup
 
@@ -50,4 +34,23 @@ task help
 task version
 man task  # task-documentation
 task commands
+
+---
+
+```
+## timewarrior
+
+- [watson](./watson.md) is far more convenient to use than timewarrior if you care about how much time you spent throughout the day
+- https://timewarrior.net/
+
+```bash
+sudo apt install timewarrior
+
+# connect with taskwarrior
+# 1. download: https://github.com/GothenburgBitFactory/timewarrior/blob/develop/ext/on-modify.timewarrior
+# 2. copy file to `~/.task/hooks/`
+# 3. chmod +x ~/.task/hooks/on-modify.timewarrior
+task diagnostics # verify activation under hooks-section
+
+timew summary '<task-description' # get total time of task will be tracked on `task start <id>` and `task stop <id>`
 ```

@@ -1,3 +1,13 @@
+### note-taking / second-brain
+
+- [remnote](https://www.remnote.com/)
+
+- [notebookLM](https://notebooklm.google.com/)
+
+### productivity apps
+
+- [ToolFinder](https://toolfinder.co/)
+
 ### datasets
 
 - [kaggle](https://www.kaggle.com/datasets)
