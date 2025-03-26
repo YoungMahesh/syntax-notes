@@ -68,6 +68,7 @@ git archive -o repository.zip HEAD
   git diff --staged # see changes in present in staging_area
   git add <file_path>   # move changes (newly created files or modification in previous files) to staging area
   git restore --staged <file-path>   # move changes from staging_area to working_area
+  git stash push -- your_file.txt # stash specific file
 
   # ------------------------ stash area ----------------------------------
   git stash # move all changes from working and staging area to stash_area
