@@ -42,6 +42,9 @@ select sum(amount) as total_info1_amt from info1;
 update ticket set status = 'approved-1' where status = 'verified';
 update ticket set status = 'approved-2'; -- update all rows
 
+-- convert all amounts in balance column to negative
+UPDATE abc SET balance = -balance;
+
 ----------------------------- create rows --------------------------------------
 
 insert into info1 (name, amount, expiry_at)
@@ -94,6 +97,20 @@ rename column name to name1;
 
 alter table info1
 drop column name;
+
+---------------------------- index -----------------------------------------
+
+-- when you create an index on a column, MySQL creates and maintains a special, separate data structure
+-- this structure stores two key things: 1. the values from the indexed column  2. a 'pointer' or reference back to the row in main table
+--  where each value occurs
+-- the data in index is kept sorted typically using data-structure called B-Tree; this sorting allows MySQL to find specific values very
+--  quickly, similar to how you can find a word in a dictionary
+-- when you run a query with a `where` clause on a indexed column, MySQL's query optimizer realizes it can use index
+--  it searches index for the value, typically taking logarithmic time complexity O(log n) instead of linear time O(n) for a full table scan
+
+-- index_name must be unique 'only within the table' in which it is created; not need to be unique across entire database
+ALTER TABLE your_table_name ADD INDEX index_name (column_name);
+ALTER TABLE balance ADD INDEX idx_userId (userId);
 
 ------------------------------- unique, foreign-key -----------------------------
 
