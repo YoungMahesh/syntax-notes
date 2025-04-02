@@ -6,6 +6,7 @@
 import { type InferSelectModel } from "drizzle-orm";
 import type { bank_account } from "@/server/db/drizzle/schema.ts/schema";
 export type details1 = {
+  // get names and types of all columns of 'bank_account' table
   bankDetails: InferSelectModel<typeof bank_account>;
 };
 ```
@@ -21,6 +22,7 @@ import type { beneficiary } from "@/server/db/drizzle/schema.ts/schema";
 export type Benificiary1 = {
   id: number;
   name: string | null;
+  // get types of 'status' column on 'beneficiary' table
   status: GetColumnData<typeof beneficiary.status>;
 }[];
 ```
